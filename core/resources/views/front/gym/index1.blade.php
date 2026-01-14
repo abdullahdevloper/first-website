@@ -60,9 +60,13 @@
                                             <i class="{{ $feature->icon }}"></i>
                                         </div>
                                     </div>
+                                    @php
+
+                                        $titleBlocks = array_map('trim', explode('#', $feature->title));
+                                    @endphp
                                     <div class="feature-text">
-                                        <h3>{{ $feature->title }}</h3>
-                                        <p>جودة مضمونة وأداء عالي</p> {{-- يمكنك استبدالها بوصف من قاعدة البيانات إذا وجد --}}
+                                        <h3>{{ $titleBlocks[0] }}</h3>
+                                        <p>{{ $titleBlocks[1] }}</p> {{-- يمكنك استبدالها بوصف من قاعدة البيانات إذا وجد --}}
                                     </div>
                                 </div>
                             </div>
@@ -315,7 +319,10 @@
         <section class="about-corporate-section pb-20">
             <div class="container">
                 <div class="row align-items-center">
+                    @php
 
+                        $introSectionTextBlocks = array_map('trim', explode('#', convertUtf8($bs->intro_section_text)));
+                    @endphp
                     {{-- الجانب البصري: صورة احترافية مع شارة الخبرة --}}
                     <div class="col-lg-6  mb-lg-0">
                         <div class="about-visual-box">
@@ -325,7 +332,7 @@
                                 {{-- شارة سنوات الخبرة لتعزيز الثقة فوراً --}}
                                 <div class="experience-badge" data-aos="zoom-in">
                                     <span class="number">25+</span>
-                                    <span class="text">عاماً من الخبرة</span>
+                                    <span class="text">{{ $introSectionTextBlocks[6] }}</span>
                                 </div>
                             </div>
                             {{-- شكل ديكوري خلف الصورة --}}
@@ -338,12 +345,11 @@
                         <div class="about-info-content">
                             <div class="section-title">
                                 <span class="identity-label">{{ convertUtf8($bs->intro_section_title) }}</span>
-                                <h2 class="main-heading">{{ convertUtf8($bs->intro_section_text) }}</h2>
+                                <h2 class="main-heading">{{ $introSectionTextBlocks[0] }}</h2>
                             </div>
 
                             <p class="company-brief">
-                                نحن شركة رائدة متخصصة في توفير أجود أنواع قطع الغيار، نلتزم بتقديم حلول متكاملة تجمع بين
-                                الدقة الهندسية والمعايير العالمية، لنكون شركاءكم في النجاح والاستدامة.
+                                {{ $introSectionTextBlocks[1] }}
                             </p>
 
                             {{-- مميزات سريعة تشرح "من نحن" --}}
@@ -351,15 +357,15 @@
                                 <div class="feature-mini-item">
                                     <div class="mini-icon"><i class="fas fa-check-circle"></i></div>
                                     <div class="mini-text">
-                                        <h4>جودة معتمدة</h4>
-                                        <p>منتجاتنا تخضع لأعلى معايير الفحص</p>
+                                        <h4>{{ $introSectionTextBlocks[2] }}</h4>
+                                        <p>{{ $introSectionTextBlocks[3] }}</p>
                                     </div>
                                 </div>
                                 <div class="feature-mini-item">
                                     <div class="mini-icon"><i class="fas fa-shuttle-van"></i></div>
                                     <div class="mini-text">
-                                        <h4>دعم لوجستي</h4>
-                                        <p>توصيل سريع لكافة المناطق</p>
+                                        <h4>{{ $introSectionTextBlocks[4] }}</h4>
+                                        <p>{{ $introSectionTextBlocks[5] }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -462,33 +468,72 @@
                 /* المميزات المصغرة */
                 .who-we-are-features {
                     display: grid;
-                    grid-template-columns: 1fr 1fr;
-                    gap: 20px;
-                    margin-bottom: 45px;
+                    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                    gap: 25px;
+                    margin-top: 30px;
                 }
 
                 .feature-mini-item {
                     display: flex;
+                    align-items: flex-start;
+                    /* الأيقونة بالأعلى بجانب النص */
                     gap: 15px;
+                    /* مسافة ذكية بين الأيقونة والنص تتغير حسب الاتجاه */
+                    text-align: start;
+                    /* سيحاذي لليمين في العربي ولليسار في الإنجليزي تلقائياً */
                 }
 
-                .mini-icon i {
-                    color: var(--primary);
-                    font-size: 1.5rem;
+                .mini-icon {
+                    flex-shrink: 0;
+                    /* يمنع انكماش الأيقونة */
+                    width: 45px;
+                    height: 45px;
+                    background: rgba(37, 208, 111, 0.1);
+                    color: #25D06F;
+                    border-radius: 10px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 20px;
                 }
 
                 .mini-text h4 {
                     font-size: 1.1rem;
                     font-weight: 800;
-                    color: var(--secondary);
+                    color: #0A3041;
                     margin-bottom: 5px;
+                    line-height: 1.2;
                 }
 
                 .mini-text p {
-                    font-size: 0.85rem;
-                    color: #777;
+                    font-size: 0.9rem;
+                    color: #666;
                     margin: 0;
+                    line-height: 1.5;
                 }
+
+                /* إصلاحات خاصة عند استخدام لغة LTR (الإنجليزية) */
+                [dir="ltr"] .feature-mini-item {
+                    text-align: left;
+                }
+
+                /* إصلاحات خاصة عند استخدام لغة RTL (العربية) */
+                [dir="rtl"] .feature-mini-item {
+                    text-align: right;
+                }
+
+                /* تحسينات الجوال */
+                @media (max-width: 576px) {
+                    .who-we-are-features {
+                        grid-template-columns: 1fr;
+                        /* عرض عمودي في الجوال */
+                    }
+
+                    .feature-mini-item {
+                        justify-content: flex-start;
+                    }
+                }
+
 
                 /* الزر */
                 .corporate-btn {
@@ -802,13 +847,17 @@
         <div class="container-fluid p-0">
             <div class="row no-gutters">
                 {{-- الجانب التعريفي --}}
+                 @php
+
+                        $productSubtitleBlocks = array_map('trim', explode('#', convertUtf8($be->product_subtitle)));
+                    @endphp
                 <div class="col-xl-3 col-lg-4 bg-secondary-identity d-flex align-items-center">
                     <div class="showroom-header p-5">
                         <span class="identity-badge">{{ convertUtf8($be->product_title) }}</span>
-                        <h2 class="text-white mt-3 mb-4 display-5">{{ convertUtf8($be->product_subtitle) }}</h2>
-                        <p class="text-white-50 mb-5">اكتشف مجموعتنا المختارة من قطع الغيار التي تجمع بين الدقة المتناهية
-                            والأداء المستدام.</p>
-                       
+                        <h2 class="text-white mt-3 mb-4 display-5">{{$productSubtitleBlocks[0]}}</h2>
+                        <p class="text-white-50 mb-5">
+                        {{ $productSubtitleBlocks[1] }}</p>
+
                     </div>
                 </div>
 
@@ -827,21 +876,17 @@
                                         <h4>{{ $product->title }}</h4>
                                         <a href="{{ route('front.product.details', $product->slug) }}"
                                             class="explore-link">
-                                            <span>التفاصيل</span>
-                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor"
-                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
+                                           <i class="fas fa-eye"></i>
                                         </a>
                                     </div>
                                 </div>
                             </div>
                         @endforeach
                     </div>
-                     <div class="slider-controls">
-                            <button class="custom-prev"><i class="fas fa-chevron-right"></i></button>
-                            <button class="custom-next"><i class="fas fa-chevron-left"></i></button>
-                        </div>
+                    <div class="slider-controls">
+                        <button class="custom-prev"><i class="fas fa-chevron-right"></i></button>
+                        <button class="custom-next"><i class="fas fa-chevron-left"></i></button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1339,7 +1384,7 @@
                     <div class="col-lg-7 text-center mb-5">
                         <div class="section-title-wrapper">
                             <span class="sub-title">{{ $bs->blog_section_title }}</span>
-                            {{-- <h2 class="main-title">{{ $bs->blog_section_subtitle }}</h2> --}}
+                            <h2 class="main-title">{{ $bs->blog_section_subtitle }}</h2>
                             <div class="title-line"></div>
                         </div>
                     </div>

@@ -74,7 +74,7 @@ class ApproachController extends Controller
     {
         $request->validate([
             'approach_section_title' => 'required|max:25',
-            'approach_section_subtitle' => 'required|max:80',
+            'approach_section_subtitle' => 'required|max:180',
             'approach_section_button_text' => 'nullable|max:15',
             'approach_section_button_url' => 'nullable|max:255',
         ]);

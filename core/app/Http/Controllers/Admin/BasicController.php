@@ -465,7 +465,7 @@ class BasicController extends Controller
             'error_title' => 'nullable|max:30',
             'error_subtitle' => 'nullable|max:40',
             'product_title' => 'nullable|max:30',
-            'product_subtitle' => 'nullable|max:40',
+            'product_subtitle' => 'nullable|max:180',
             'product_details_title' => 'nullable|max:30',
             // 'product_details_subtitle' => 'nullable|max:40',
             'cart_title' => 'nullable|max:30',
