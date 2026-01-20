@@ -13,122 +13,211 @@
 
 @section('content')
 
-
-<!--    contact form and map start   -->
-<div class="contact-form-section">
+<!-- Start Quick Enquiry Section -->
+<div class="quick-enquiry-section">
     <div class="container">
-        <div class="contact-infos mb-5">
-            <div class="row no-gutters">
-                <div class="col-lg-4 single-info-col">
-                    <div class="single-info wow fadeInRight" data-wow-duration="1s" style="visibility: visible; animation-duration: 1s; animation-name: fadeInRight;">
-                        <div class="icon-wrapper"><i class="fas fa-home"></i></div>
-                        <div class="info-txt">
-                            @php
-                                $addresses = explode(PHP_EOL, $bex->contact_addresses);
-                            @endphp
-                            @foreach ($addresses as $address)
-                            <p><i class="fas fa-map-pin base-color mr-1"></i> {{$address}}</p>
-                            @endforeach
-                        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                
+                <div class="enquiry-wrapper">
+                    
+                    {{-- العنوان والنص الوصفي --}}
+                    <div class="enquiry-header">
+                        <h2 class="enquiry-title">QUICK ENQUIRY</h2>
+                        <p class="enquiry-desc">
+                            Please feel free to contact us by filling out the inquiry form provided. We will gladly respond back to you with your queries.
+                        </p>
                     </div>
-                </div>
-                <div class="col-lg-4 single-info-col">
-                    <div class="single-info wow fadeInRight" data-wow-duration="1s" data-wow-delay=".2s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.2s; animation-name: fadeInRight;">
-                        <div class="icon-wrapper"><i class="fas fa-phone"></i></div>
-                        <div class="info-txt">
-                            @php
-                                $phones = explode(',', $bex->contact_numbers);
-                            @endphp
-                            @foreach ($phones as $phone)
-                            <p>{{$phone}}</p>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 single-info-col">
-                    <div class="single-info wow fadeInRight" data-wow-duration="1s" data-wow-delay=".4s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.4s; animation-name: fadeInRight;">
-                        <div class="icon-wrapper"><i class="far fa-envelope"></i></div>
-                        <div class="info-txt">
-                            @php
-                                $mails = explode(',', $bex->contact_mails);
-                            @endphp
-                            @foreach ($mails as $mail)
-                            <p>{{$mail}}</p>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <span class="section-title">{{convertUtf8($bs->contact_form_title)}}</span>
-                <h2 class="section-summary">{{convertUtf8($bs->contact_form_subtitle)}}</h2>
-                <form action="{{route('front.sendmail')}}" class="contact-form" method="POST">
-                    @csrf
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-element">
-                                <input name="name" type="text" placeholder="{{__('Name')}}" required>
-                            </div>
-                            @if ($errors->has('name'))
-                            <p class="text-danger mb-0">{{$errors->first('name')}}</p>
-                            @endif
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-element">
-                                <input name="email" type="email" placeholder="{{__('Email')}}" required>
-                            </div>
-                            @if ($errors->has('email'))
-                            <p class="text-danger mb-0">{{$errors->first('email')}}</p>
-                            @endif
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-element">
-                                <input name="subject" type="text" placeholder="{{__('Subject')}}" required>
-                            </div>
-                            @if ($errors->has('subject'))
-                            <p class="text-danger mb-0">{{$errors->first('subject')}}</p>
-                            @endif
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-element">
-                                <textarea name="message" id="comment" cols="30" rows="10" placeholder="{{__('Comment')}}" required></textarea>
-                            </div>
-                            @if ($errors->has('message'))
-                            <p class="text-danger mb-0">{{$errors->first('message')}}</p>
-                            @endif
-                        </div>
-                        @if ($bs->is_recaptcha == 1)
-                        <div class="col-lg-12 mb-4">
-                            {!! NoCaptcha::renderJs() !!}
-                            {!! NoCaptcha::display() !!}
-                            @if ($errors->has('g-recaptcha-response'))
-                            @php
-                            $errmsg = $errors->first('g-recaptcha-response');
-                            @endphp
-                            <p class="text-danger mb-0">{{__("$errmsg")}}</p>
-                            @endif
-                        </div>
-                        @endif
 
-                        <div class="col-md-12">
-                            <div class="form-element no-margin">
-                                <input type="submit" value="{{__('Submit')}}">
+                    {{-- بداية الفورم --}}
+                    <form action="{{route('front.sendmail')}}" class="contact-form" method="POST">
+                        @csrf
+                        
+                        <div class="row">
+                            
+                            {{-- حقل الاسم الكامل (عرض كامل) --}}
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="fullname">Full Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="name" id="fullname" placeholder="Full Name" required>
+                                    @error('name')
+                                        <p class="text-danger mb-0">{{ $message }}</p>
+                                    @enderror
+                                </div>
                             </div>
+
+                            {{-- حقل البريد الإلكتروني (نصف عرض) --}}
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="email">Email Address <span class="text-danger">*</span></label>
+                                    <input type="email" class="form-control" name="email" id="email" placeholder="Email Address" required>
+                                    @error('email')
+                                        <p class="text-danger mb-0">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            {{-- حقل الهاتف (نصف عرض) --}}
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="phone">Phone <span class="text-danger">*</span></label>
+                                    {{-- تم إضافة كلاس لتهيئة مكتبة الأعلام إذا كانت مستخدمة، أو يبقى حقل عادي --}}
+                                    <div class="phone-input-wrapper">
+                                        <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone Number" required>
+                                    </div>
+                                    @error('phone')
+                                        <p class="text-danger mb-0">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            {{-- حقل الرسالة (عرض كامل) --}}
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="message">Comment or Message</label>
+                                    <textarea name="message" id="message" class="form-control" rows="5" placeholder=""></textarea>
+                                    @error('message')
+                                        <p class="text-danger mb-0">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            {{-- كود الكابتشا (إذا كان مفعلاً في نظامك) --}}
+                            @if ($bs->is_recaptcha == 1)
+                                <div class="col-12 mb-4">
+                                    {!! NoCaptcha::renderJs() !!}
+                                    {!! NoCaptcha::display() !!}
+                                    @error('g-recaptcha-response')
+                                        <p class="text-danger mb-0">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            @endif
+
+                            {{-- زر الإرسال --}}
+                            <div class="col-12">
+                                <button type="submit" class="btn-submit">Submit Now</button>
+                            </div>
+
                         </div>
-                    </div>
-                </form>
-            </div>
-            <div class="col-lg-6">
-                <div class="map-wrapper">
-                    <div id="map">
-                        <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q={{$bex->latitude}},%20{{$bex->longitude}}+(My%20Business%20Name)&amp;t=&amp;z={{$bex->map_zoom}}&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
-                    </div>
+                    </form>
+                    {{-- نهاية الفورم --}}
+
                 </div>
+
             </div>
         </div>
     </div>
 </div>
+<!-- End Quick Enquiry Section -->
+
+<style>
+    /* =========================================
+       تنسيقات نموذج الاستفسار السريع (Quick Enquiry)
+       ========================================= */
+    .quick-enquiry-section {
+        padding: 60px 0;
+        background-color: #fff; /* خلفية القسم بيضاء */
+    }
+
+    /* الحاوية الرمادية للفورم */
+    .enquiry-wrapper {
+        background-color: #E9ECEF; /* لون رمادي فاتح مطابق للصورة */
+        padding: 40px;
+        /* لا يوجد بوردر راديوس أو ظلال في الصورة، تصميم مسطح */
+    }
+
+    /* 1. رأس النموذج */
+    .enquiry-title {
+        color: #001530; /* كحلي غامق */
+        font-family: 'Oswald', sans-serif; /* خط العناوين */
+        font-weight: 800;
+        font-size: 2rem;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+    }
+
+    .enquiry-desc {
+        color: #666;
+        font-size: 0.95rem;
+        font-family: 'Open Sans', sans-serif;
+        margin-bottom: 30px;
+    }
+
+    /* 2. حقول الإدخال */
+    .form-group {
+        margin-bottom: 20px;
+        text-align: left; /* محاذاة التسميات لليسار */
+    }
+
+    .form-group label {
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    .form-group label .text-danger {
+        color: #25D06F !important; /* النجمة الحمراء */
+    }
+
+    /* تخصيص الـ Inputs */
+    .form-control {
+        background-color: #ffffff;
+        border: 1px solid #ddd; /* حدود خفيفة جداً أو بدون */
+        border-radius: 2px; /* حواف شبه حادة */
+        padding: 12px 15px;
+        height: auto; /* ترك الارتفاع تلقائي مع البادينغ */
+        font-size: 0.95rem;
+        color: #555;
+        box-shadow: none;
+    }
+
+    .form-control:focus {
+        border-color: #ccc;
+        box-shadow: none; /* إزالة توهج البوتستراب الافتراضي */
+        background-color: #fff;
+    }
+
+    .form-control::placeholder {
+        color: #aaa;
+        font-weight: 400;
+    }
+
+    /* تخصيص الـ Textarea */
+    textarea.form-control {
+        resize: vertical; /* السماح بتغيير الحجم عمودياً فقط */
+        min-height: 120px;
+    }
+
+    /* 3. زر الإرسال */
+    .btn-submit {
+        background-color: #005691; /* أزرق متوسط (مطابق للصورة) */
+        color: #fff;
+        border: none;
+        padding: 12px 30px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s;
+        border-radius: 2px;
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    .btn-submit:hover {
+        background-color: #00447a; /* درجة أغمق عند التحويم */
+    }
+
+    /* استجابة الجوال */
+    @media (max-width: 768px) {
+        .enquiry-wrapper {
+            padding: 20px;
+        }
+        .enquiry-title {
+            font-size: 1.5rem;
+        }
+    }
+</style>
+
 <!--    contact form and map end   -->
 @endsection

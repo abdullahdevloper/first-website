@@ -120,6 +120,8 @@ class ProductController extends Controller
 
             ->where('status', 1)->paginate(9);
 
+            info('products list:');
+            info($data['products']);
             $version = $be->theme_version;
 
             if ($version == 'dark') {

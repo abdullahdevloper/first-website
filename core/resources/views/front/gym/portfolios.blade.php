@@ -27,7 +27,7 @@
         }
 
         :root {
-            --primary-red: #E31E24;
+            --primary-red: #25D06F;
             --primary-navy: #001530;
             --text-grey: #666;
         }
@@ -102,7 +102,7 @@
             background: var(--primary-red); display: flex; align-items: center; justify-content: center;
             color: #fff; font-size: 1.5rem; transition: 0.3s;
         }
-        .play-overlay:hover { background: #b01217; }
+        .play-overlay:hover { background: #25D06F; }
 
 
         /* =========================================

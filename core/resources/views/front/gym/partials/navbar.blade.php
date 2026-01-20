@@ -1,6 +1,5 @@
 <!-- استيراد الخطوط (يفضل وضعه في head الموقع) -->
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-
 <header class="asimco-header-area">
     <div class="container-fluid custom-container">
         <div class="header-inner d-flex align-items-center justify-content-between">
@@ -8,40 +7,29 @@
             {{-- 1. الشعار (Logo) --}}
             <div class="logo-wrapper">
                 <a href="{{ route('front.index') }}">
-                    {{-- استبدل المسار أدناه بمسار الشعار الخاص بك --}}
                     <img src="{{ asset('assets/front/img/' . $bs->logo) }}" alt="Logo" class="img-fluid logo-img">
                 </a>
             </div>
 
-            {{-- 2. القائمة الرئيسية (Navigation) --}}
+            {{-- 2. القائمة الرئيسية (للكمبيوتر فقط) --}}
             <nav class="main-menu d-none d-lg-block">
                 <ul>
-                    @php
-                        $links = json_decode($menus, true);
-                    @endphp
-
+                    @php $links = json_decode($menus, true); @endphp
                     @foreach ($links as $index => $link)
                         @php
                             $href = getHref($link);
-                            // تحديد إذا كان العنصر يحتوي على قائمة منسدلة
                             $hasChildren = isset($link["children"]) && !empty($link["children"]);
                         @endphp
-
                         <li class="{{ $hasChildren ? 'has-dropdown' : '' }} {{ $index == 0 ? 'active-red' : '' }}">
                             <a href="{{ $href }}" target="{{ $link["target"] }}">
                                 {{ $link["text"] }} 
                                 @if($hasChildren) <i class="fas fa-chevron-down small-chevron"></i> @endif
                             </a>
-
-                            {{-- القائمة المنسدلة (Level 2) --}}
                             @if ($hasChildren)
                                 <ul class="dropdown-menu-custom">
                                     @foreach ($link["children"] as $level2)
                                         @php $l2Href = getHref($level2); @endphp
-                                        <li>
-                                            <a href="{{ $l2Href }}" target="{{ $level2["target"] }}">{{ $level2["text"] }}</a>
-                                            {{-- (Level 3) يمكن إضافته هنا بنفس المنطق إذا لزم الأمر --}}
-                                        </li>
+                                        <li><a href="{{ $l2Href }}" target="{{ $level2["target"] }}">{{ $level2["text"] }}</a></li>
                                     @endforeach
                                 </ul>
                             @endif
@@ -50,36 +38,74 @@
                 </ul>
             </nav>
 
-            {{-- 3. الجانب الأيمن (Socials + Button) --}}
+            {{-- 3. الجانب الأيمن (أيقونات وزر) --}}
             <div class="header-right-actions d-flex align-items-center">
-                
-                {{-- أيقونات التواصل الاجتماعي --}}
-                <div class="social-icons-wrapper d-none d-md-flex">
+                {{-- سوشيال (يختفي في الموبايل الصغير جداً) --}}
+                <div class="social-icons-wrapper d-none d-sm-flex">
                     @foreach ($socials as $social)
-                        <a href="{{ $social->url }}" target="_blank" class="social-link">
-                            <i class="{{ $social->icon }}"></i>
-                        </a>
+                        <a href="{{ $social->url }}" target="_blank" class="social-link"><i class="{{ $social->icon }}"></i></a>
                     @endforeach
                 </div>
 
                 {{-- زر FIND PARTS --}}
-                {{-- يمكنك ربطه بصفحة البحث أو المنتجات --}}
-                <div class="cta-button-wrapper">
-                    <a href="{{ route('front.product') }}" class="btn-find-parts">
-                        FIND PARTS
-                    </a>
+                <div class="cta-button-wrapper d-none d-md-block">
+                    <a href="{{ route('front.product') }}" class="btn-find-parts">FIND PARTS</a>
                 </div>
 
-                {{-- زر القائمة للموبايل (Hamburger) --}}
+                {{-- زر القائمة للموبايل (Hamburger Icon) --}}
                 <div class="mobile-menu-trigger d-lg-none ml-3">
                     <i class="fas fa-bars"></i>
                 </div>
-
             </div>
-
         </div>
     </div>
 </header>
+
+{{-- ========================================= --}}
+{{-- 4. قائمة الموبايل الجانبية (Mobile Sidebar) --}}
+{{-- ========================================= --}}
+<div class="mobile-menu-overlay"></div>
+<div class="mobile-menu-sidebar">
+    <div class="mobile-menu-header">
+        {{-- الشعار داخل القائمة --}}
+        <img src="{{ asset('assets/front/img/' . $bs->logo) }}" alt="Logo">
+        {{-- زر الإغلاق --}}
+        <div class="close-mobile-menu">
+            <i class="fas fa-times"></i>
+        </div>
+    </div>
+    
+    <div class="mobile-menu-body">
+        <ul>
+            @foreach ($links as $link)
+                @php
+                    $href = getHref($link);
+                    $hasChildren = isset($link["children"]) && !empty($link["children"]);
+                @endphp
+                <li class="{{ $hasChildren ? 'mobile-has-dropdown' : '' }}">
+                    <a href="{{ $href }}">
+                        {{ $link["text"] }}
+                        @if($hasChildren) <i class="fas fa-chevron-right float-right"></i> @endif
+                    </a>
+                    {{-- القائمة المنسدلة في الموبايل --}}
+                    @if ($hasChildren)
+                        <ul class="mobile-submenu">
+                            @foreach ($link["children"] as $level2)
+                                <li><a href="{{ getHref($level2) }}">{{ $level2["text"] }}</a></li>
+                            @endforeach
+                        </ul>
+                    @endif
+                </li>
+            @endforeach
+        </ul>
+        
+        {{-- زر FIND PARTS في الموبايل --}}
+        <div class="mt-4 px-3">
+            <a href="{{ route('front.product') }}" class="btn-find-parts w-100 text-center">FIND PARTS</a>
+        </div>
+    </div>
+</div>
+
 
 <style>
     /* =========================================
@@ -245,4 +271,129 @@
         .main-menu ul li a { font-size: 13px; }
         .btn-find-parts { padding: 10px 20px; font-size: 13px; }
     }
+
+    /* ... (تنسيقات الهيدر السابقة تبقى كما هي) ... */
+    
+    /* =========================================
+       تنسيقات قائمة الموبايل (Mobile Menu Styles)
+       ========================================= */
+    
+    /* 1. طبقة التعتيم الخلفية */
+    .mobile-menu-overlay {
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.7);
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+    .mobile-menu-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* 2. القائمة الجانبية نفسها */
+    .mobile-menu-sidebar {
+        position: fixed;
+        top: 0;
+        left: -300px; /* مخفية خارج الشاشة لليسار */
+        width: 280px;
+        height: 100vh;
+        background: #fff;
+        z-index: 1001;
+        transition: all 0.4s ease;
+        box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        overflow-y: auto;
+    }
+    .mobile-menu-sidebar.active {
+        left: 0; /* إظهار القائمة */
+    }
+
+    /* 3. رأس القائمة الجانبية */
+    .mobile-menu-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px;
+        border-bottom: 1px solid #eee;
+    }
+    .mobile-menu-header img {
+        max-width: 120px;
+    }
+    .close-mobile-menu {
+        font-size: 20px;
+        cursor: pointer;
+        color: #25D06F;
+    }
+
+    /* 4. روابط القائمة */
+    .mobile-menu-body ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+    .mobile-menu-body ul li {
+        border-bottom: 1px solid #f5f5f5;
+    }
+    .mobile-menu-body ul li a {
+        display: block;
+        padding: 15px 20px;
+        color: #001530;
+        font-weight: 700;
+        text-transform: uppercase;
+        text-decoration: none;
+        font-family: 'Oswald', sans-serif;
+        font-size: 14px;
+    }
+    .mobile-menu-body ul li a:hover {
+        color: #25D06F;
+    }
+
+    /* القوائم المنسدلة في الموبايل */
+    .mobile-submenu {
+        background: #f9f9f9;
+        display: none; /* مخفية افتراضياً */
+        padding-left: 15px !important;
+    }
+    .mobile-submenu li {
+        border-bottom: none !important;
+    }
+    .mobile-submenu li a {
+        font-size: 13px;
+        padding: 10px 20px;
+        color: #555;
+    }
+
+    /* زر القائمة (Hamburger) */
+    .mobile-menu-trigger {
+        cursor: pointer;
+        font-size: 24px;
+        color: #001530;
+    }
+
 </style>
+<script>
+    $(document).ready(function() {
+        
+        // 1. عند الضغط على أيقونة القائمة (فتح القائمة)
+        $('.mobile-menu-trigger').on('click', function() {
+            $('.mobile-menu-sidebar').addClass('active');
+            $('.mobile-menu-overlay').addClass('active');
+        });
+
+        // 2. عند الضغط على زر الإغلاق أو الخلفية السوداء (إغلاق القائمة)
+        $('.close-mobile-menu, .mobile-menu-overlay').on('click', function() {
+            $('.mobile-menu-sidebar').removeClass('active');
+            $('.mobile-menu-overlay').removeClass('active');
+        });
+
+        // 3. (اختياري) فتح القوائم المنسدلة داخل الموبايل عند الضغط
+        $('.mobile-has-dropdown > a').on('click', function(e) {
+            e.preventDefault(); // منع الرابط من الانتقال فوراً (إذا أردت جعل العنوان زر توسيع فقط)
+            $(this).parent().find('.mobile-submenu').slideToggle(); // فتح/إغلاق القائمة الفرعية
+            $(this).find('i').toggleClass('fa-chevron-right fa-chevron-down'); // تغيير السهم
+        });
+
+    });
+</script>

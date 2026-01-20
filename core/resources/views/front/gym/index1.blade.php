@@ -158,7 +158,7 @@
     }
 
     .custom-nav-btn:hover {
-        background-color: #b01217;
+        background-color: #25D06F;
     }
 
     .custom-prev { left: -60px; }
@@ -582,7 +582,7 @@
                 </p>
 
                 {{-- الزر --}}
-                <a href="#" class="btn-solid-red">KNOW MORE</a>
+                <a href="https://first-parts.com/portfolios" class="btn-solid-red">KNOW MORE</a>
                 
             </div>
         </div>

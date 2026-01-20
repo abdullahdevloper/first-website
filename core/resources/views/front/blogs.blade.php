@@ -154,7 +154,7 @@
     <div class="container">
         <div class="row">
             {{-- منطقة المقالات الرئيسية --}}
-            <div class="col-lg-8">
+            <div class="col-lg-12">
                 <div class="row">
                     @if (count($blogs) == 0)
                         <div class="col-md-12">
@@ -165,7 +165,7 @@
                         </div>
                     @else
                         @foreach ($blogs as $key => $blog)
-                        <div class="col-md-6 mb-4">
+                        <div class="col-md-4 mb-4">
                             <article class="blog-post-card">
                                 <div class="post-img-wrapper">
                                     <a href="{{route('front.blogdetails', [$blog->slug])}}">
@@ -215,9 +215,8 @@
             </div>
 
             {{-- الجانب الجانبي (Sidebar) --}}
-            <div class="col-lg-4 mt-5 mt-lg-0">
+            {{-- <div class="col-lg-4 mt-5 mt-lg-0">
                 <aside class="blog-sidebar">
-                    {{-- محرك البحث --}}
                     <div class="sidebar-widget search-widget">
                         <h4 class="widget-title">{{__('Search')}}</h4>
                         <form action="{{route('front.blogs')}}" method="GET">
@@ -228,7 +227,6 @@
                         </form>
                     </div>
 
-                    {{-- الأقسام --}}
                     <div class="sidebar-widget category-widget">
                         <h4 class="widget-title">{{__('Categories')}}</h4>
                         <ul class="category-list">
@@ -243,7 +241,6 @@
                         </ul>
                     </div>
 
-                    {{-- النشرة البريدية بتصميم مميز --}}
                     <div class="sidebar-widget newsletter-widget">
                         <div class="newsletter-box" style="background-color: #0A3041;">
                             <i class="far fa-paper-plane mb-3"></i>
@@ -258,7 +255,7 @@
                         </div>
                     </div>
                 </aside>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>
