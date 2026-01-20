@@ -130,6 +130,8 @@ Route::group(['middleware' => 'setlang'], function () {
   Route::get('/changelanguage/{lang}', 'Front\FrontendController@changeLanguage')->name('changeLanguage');
 
   // Product
+Route::get('/products/search', 'Front\ProductController@search')->name('products.search');
+
   Route::get('/cart', 'Front\ProductController@cart')->name('front.cart');
   Route::get('/add-to-cart/{id}', 'Front\ProductController@addToCart')->name('add.cart');
   Route::post('/cart/update', 'Front\ProductController@updatecart')->name('cart.update');

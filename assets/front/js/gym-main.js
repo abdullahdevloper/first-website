@@ -203,29 +203,46 @@
 // });
 
 
-$('#modernProductSlider').slick({
-    dots: false,
+$(document).ready(function(){
+    $("#modernProductSlider").owlCarousel({
+        loop: true,
     infinite: true,
-    speed: 800,
-    slidesToShow: 3,
+
+         // المسافة بين المنتجات
+        nav: true, // سنستخدم أزرارنا الخاصة
+        dots: false,
+        autoplay: true,
+           slidesToShow: 3,
     slidesToScroll: 1,
     rtl: true,
-    prevArrow: $('.custom-prev'),
+        prevArrow: $('.custom-prev'),
     nextArrow: $('.custom-next'),
-    responsive: [
-        {
-            breakpoint: 1200,
-            settings: { slidesToShow: 2 }
-        },
-        {
-            breakpoint: 768,
-            settings: {
-                slidesToShow: 1,
-                centerMode: true,
-                centerPadding: '40px'
+        // الإعدادات حسب حجم الشاشة
+        responsive: {
+            0: {
+                items: 1,       // عرض منتج واحد فقط
+                stagePadding: 0, // هام: جعل الحافة صفر لمنع ظهور المنتجات المجاورة
+                margin: 0       // إلغاء المسافات الجانبية في الجوال
+            },
+            600: {
+                items: 2,
+                stagePadding: 0
+            },
+            1000: {
+                items: 3, // أو 4 حسب رغبتك في الشاشات الكبيرة
+                stagePadding: 0
             }
         }
-    ]
+    });
+
+    // ربط الأزرار الحمراء بوظائف السلايدر
+    var owl = $('#modernProductSlider');
+    $('.custom-next').click(function() {
+        owl.trigger('next.owl.carousel');
+    });
+    $('.custom-prev').click(function() {
+        owl.trigger('prev.owl.carousel');
+    });
 });
 
 $(document).ready(function () {

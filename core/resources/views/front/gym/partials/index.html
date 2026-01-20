@@ -1,8 +1,9 @@
-@extends('front.gym.layout')
-
-
-@section('content')
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASIMCO Integrated Design</title>
     
     <!-- مكتبات الخطوط والأيقونات والـ Bootstrap -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
@@ -111,7 +112,7 @@
         .stats-section {
             position: relative;
             /* استبدل الرابط أدناه بصورة المصنع الخاصة بك */
-            background-image: url('http://localhost/first-parts/assets/front/img/product/featured/696e8e4857bd1.png');
+            background-image: url('https://images.unsplash.com/photo-1486262715619-72a6075f1ed8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80');
             background-size: cover;
             background-position: center;
             background-attachment: fixed; /* تثبيت الخلفية */
@@ -194,6 +195,9 @@
             .experience-box { display: block; width: 100%; margin-bottom: 30px; }
         }
     </style>
+</head>
+<body>
+
     <!-- =========================================
          1. SECTION: WHO WE ARE
          ========================================= -->
@@ -322,89 +326,66 @@
         </div>
     </section>
 
-
-        <!-- =========================================
-             JAVASCRIPT FOR COUNTER ANIMATION
-             ========================================= -->
-
-    @endsection
-
-    @section('scripts')
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const counters = document.querySelectorAll('.counter');
-        
-        const startCounter = (counter) => {
-            // 1. قراءة البيانات وتنظيفها بشكل صارم جداً
-            const rawTarget = counter.getAttribute('data-target');
+    <!-- =========================================
+         JAVASCRIPT: COUNTER ANIMATION (No NaN)
+         ========================================= -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const counters = document.querySelectorAll('.counter');
             
-            // إزالة أي شيء ليس رقماً أو نقطة (يحذف المسافات والفواصل والحروف)
-            let cleanTarget = rawTarget ? rawTarget.toString().replace(/[^0-9.]/g, '') : '0';
-            
-            // تحويل إلى رقم، وإذا فشل التحويل نعتبره صفر
-            let target = parseFloat(cleanTarget);
-            if (isNaN(target)) target = 0;
-
-            const suffix = counter.getAttribute('data-suffix') || '';
-            // التأكد من أن المنازل العشرية رقم صحيح
-            let decimals = parseInt(counter.getAttribute('data-decimals'));
-            if (isNaN(decimals)) decimals = 0;
-            
-            const duration = 2000; // 2 ثانية
-            let startTime = null;
-
-            const animate = (currentTime) => {
-                if (!startTime) startTime = currentTime;
-                const progress = currentTime - startTime;
+            const startCounter = (counter) => {
+                const target = +counter.getAttribute('data-target');
+                const suffix = counter.getAttribute('data-suffix') || '';
+                const decimals = +counter.getAttribute('data-decimals') || 0;
                 
-                // حساب النسبة (من 0 إلى 1)
-                const percentage = Math.min(progress / duration, 1);
-                
-                // معادلة الحركة لجعلها ناعمة
-                const easeOut = 1 - Math.pow(1 - percentage, 3);
-                
-                let currentCount = easeOut * target;
+                // مدة الانيميشن (ثانيتين)
+                const duration = 2000; 
+                let startTime = null;
 
-                // حماية إضافية: إذا كان الرقم الناتج غير صالح، استخدم الهدف مباشرة
-                if (isNaN(currentCount)) currentCount = target;
+                const animate = (currentTime) => {
+                    if (!startTime) startTime = currentTime;
+                    const progress = currentTime - startTime;
+                    
+                    const percentage = Math.min(progress / duration, 1);
+                    const currentCount = percentage * target;
 
-                // العرض أثناء الحركة
-                counter.innerText = currentCount.toLocaleString('en-US', {
-                    minimumFractionDigits: decimals,
-                    maximumFractionDigits: decimals
-                }) + suffix;
-
-                if (progress < duration) {
-                    requestAnimationFrame(animate);
-                } else {
-                    // 2. الخطوة النهائية: ضمان عدم ظهور NaN أبداً
-                    // نستخدم target المحسوب مسبقاً والذي تأكدنا أنه رقم
-                    counter.innerText = target.toLocaleString('en-US', {
+                    // تنسيق الرقم لضمان عدم ظهور NaN
+                    counter.innerText = currentCount.toLocaleString('en-US', {
                         minimumFractionDigits: decimals,
                         maximumFractionDigits: decimals
                     }) + suffix;
-                }
+
+                    if (progress < duration) {
+                        requestAnimationFrame(animate);
+                    } else {
+                        // التأكد من النهاية الصحيحة
+                        counter.innerText = target.toLocaleString('en-US', {
+                            minimumFractionDigits: decimals,
+                            maximumFractionDigits: decimals
+                        }) + suffix;
+                    }
+                };
+                
+                requestAnimationFrame(animate);
             };
-            
-            requestAnimationFrame(animate);
-        };
 
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const counter = entry.target;
-                    startCounter(counter);
-                    observer.unobserve(counter);
-                }
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        startCounter(counter);
+                        observer.unobserve(counter); // إيقاف المراقبة لمنع إعادة العد أو التصفير
+                    }
+                });
+            }, {
+                threshold: 0.5
             });
-        }, {
-            threshold: 0.2
-        });
 
-        counters.forEach(counter => {
-            observer.observe(counter);
+            counters.forEach(counter => {
+                observer.observe(counter);
+            });
         });
-    });
-</script>
+    </script>
 
-    @endsection
+</body>
+</html>

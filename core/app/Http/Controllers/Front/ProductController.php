@@ -28,6 +28,27 @@ class ProductController extends Controller
         $be = BE::first();
     }
 
+      public function search(Request $request)
+    {
+        // استلام كلمة البحث من النموذج
+        $query = $request->input('query');
+
+        // البحث في قاعدة البيانات عن المنتجات التي تطابق العنوان أو الوصف
+        // مع جلب الفئة الخاصة بكل منتج لتجنب استعلامات إضافية (N+1 problem)
+        $products = Product::with('category')
+                            ->where('status', 1) // جلب المنتجات الفعالة فقط
+                            ->where(function($q) use ($query) {
+                                $q->where('title', 'LIKE', '%' . $query . '%')
+                                  ->orWhere('description', 'LIKE', '%' . $query . '%');
+                            })
+                            ->paginate(9); // عرض 9 نتائج في كل صفحة
+
+        // إرسال البيانات إلى صفحة عرض النتائج
+        return view('front.products.search_results', [
+            'products' => $products,
+            'query' => $query
+        ]);
+    }
     public function product(Request $request)
     {
 
