@@ -1,6 +1,6 @@
 <!-- استيراد الخطوط (يفضل وضعه في head الموقع) -->
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-<header class="asimco-header-area">
+<header class="first-header-area">
     <div class="container-fluid custom-container">
         <div class="header-inner d-flex align-items-center justify-content-between">
 
@@ -111,7 +111,7 @@
     /* =========================================
        تصميم الهيدر المطابق للصورة
        ========================================= */
-    .asimco-header-area {
+    .first-header-area {
         background-color: #ffffff;
         padding: 15px 0;
         box-shadow: 0 2px 10px rgba(0,0,0,0.05);

@@ -411,7 +411,7 @@
 
                     {{-- النص --}}
                     <p class="company-brief-text">
-                        FIRST has earned an outstanding reputation as a trusted automotive parts manufacturer and supplier for consistently delivering high-quality products. With over two decades of excellence, ASIMCO offers an extensive range of components, including brake pads, brake shoes, brake discs, fuel pumps, brake fluids, horns, and shock absorbers. Recognized among the leading automotive component manufacturers and auto parts distributors, ASIMCO products are now sold in over 80 countries worldwide.
+                        FIRST has earned an outstanding reputation as a trusted automotive parts manufacturer and supplier for consistently delivering high-quality products. With over two decades of excellence, FIRST offers an extensive range of components, including brake pads, brake shoes, brake discs, fuel pumps, brake fluids, horns, and shock absorbers. Recognized among the leading automotive component manufacturers and auto parts distributors, FIRST products are now sold in over 80 countries worldwide.
                     </p>
 
                     {{-- الزر --}}
@@ -578,7 +578,7 @@
                 
                 {{-- النص الوصفي --}}
                 <p class="quality-desc">
-                    ASIMCO is committed to providing high-quality products and offers an automotive parts and components for global markets. Our range includes premium brake pads, brake shoes, brake discs, fuel pumps, and shock absorbers. As a reliable automotive parts supplier and distributor, we ensure durable performance tested for every road condition. Trusted by drivers and businesses alike, ASIMCO stands among the top automotive parts wholesalers in the Middle East and beyond.
+                    FIRST is committed to providing high-quality products and offers an automotive parts and components for global markets. Our range includes premium brake pads, brake shoes, brake discs, fuel pumps, and shock absorbers. As a reliable automotive parts supplier and distributor, we ensure durable performance tested for every road condition. Trusted by drivers and businesses alike, FIRST stands among the top automotive parts wholesalers in the Middle East and beyond.
                 </p>
 
                 {{-- الزر --}}
@@ -603,9 +603,9 @@
                     <div class="icon-box">
                         <i class="fa-regular fa-heart"></i>
                     </div>
-                    <h3 class="item-title">ASIMCO CARES</h3>
+                    <h3 class="item-title">FIRST CARES</h3>
                     <p class="item-desc">
-                        Pioneering the well-being of automotive communities worldwide, ASIMCO goes beyond being just an automotive parts manufacturer by setting new standards in sustainable initiatives for lasting positive impacts.
+                        Pioneering the well-being of automotive communities worldwide, FIRST goes beyond being just an automotive parts manufacturer by setting new standards in sustainable initiatives for lasting positive impacts.
                     </p>
                 </div>
 

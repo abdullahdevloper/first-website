@@ -256,7 +256,7 @@
                         <br>
                         {{-- نص ثابت يحاكي الصورة إذا لم يكن موجوداً في الداتا --}}
                         <p>
-                            Asimco is a trusted automotive parts manufacturer, offering premium quality horns along with 
+                            FIRST is a trusted automotive parts manufacturer, offering premium quality horns along with 
                             <a href="#">brake pads</a>, <a href="#">shock absorbers</a>, <a href="#">radiators</a>, and more.
                         </p>
                     </div>

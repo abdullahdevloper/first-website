@@ -205,9 +205,9 @@
                     <span class="section-subtitle-red">WHO WE ARE</span>
                     
                     <div class="who-text">
-                        <p>ASIMCO has earned an outstanding reputation for consistently delivering high-quality products. ASIMCO has meticulously crafted an extensive range of brake components, including brake pads, brake shoes, disc rotors, fuel pumps, brake fluids, horns, and shock absorbers. ASIMCO's unwavering dedication to quality has been a driving force behind its substantial growth in market share, with products now being sold in over 80 countries.</p>
+                        <p>FIRST has earned an outstanding reputation for consistently delivering high-quality products. FIRST has meticulously crafted an extensive range of brake components, including brake pads, brake shoes, disc rotors, fuel pumps, brake fluids, horns, and shock absorbers. FIRST's unwavering dedication to quality has been a driving force behind its substantial growth in market share, with products now being sold in over 80 countries.</p>
                         
-                        <p>A cornerstone of ASIMCO's success lies in its exceptional Research and Development, which is wholeheartedly committed to continuously refining and enhancing original formulas in ceramic, semi-metal, and low-metal materials.</p>
+                        <p>A cornerstone of FIRST's success lies in its exceptional Research and Development, which is wholeheartedly committed to continuously refining and enhancing original formulas in ceramic, semi-metal, and low-metal materials.</p>
                     </div>
 
                     <div class="d-flex justify-content-center justify-content-lg-start">
@@ -315,7 +315,7 @@
                     </h2>
 
                     <p class="dist-text">
-                        Taking a proactive stand on quality, ASIMCO maximizes its market share while enabling retailers to achieve brand excellence. We display unparalleled quality, reliability, and road safety, making us the number ONE choice for brake products. Whether you are an enthusiast or an everyday commuter, we bestow absolute on-road confidence with our brake products.
+                        Taking a proactive stand on quality, FIRST maximizes its market share while enabling retailers to achieve brand excellence. We display unparalleled quality, reliability, and road safety, making us the number ONE choice for brake products. Whether you are an enthusiast or an everyday commuter, we bestow absolute on-road confidence with our brake products.
                     </p>
                 </div>
             </div>
