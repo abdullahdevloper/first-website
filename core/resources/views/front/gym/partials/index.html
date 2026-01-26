@@ -1,391 +1,337 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASIMCO Integrated Design</title>
-    
-    <!-- مكتبات الخطوط والأيقونات والـ Bootstrap -->
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-    <style>
-        /* =========================================
-           GLOBAL STYLES
-           ========================================= */
-        body {
-            font-family: 'Open Sans', sans-serif;
-            color: #555;
-            overflow-x: hidden;
-            margin: 0;
-            padding: 0;
-        }
-
-        h1, h2, h3, h4 {
-            font-family: 'Oswald', sans-serif;
-            text-transform: uppercase;
-        }
-
-        :root {
-            --primary-red: #E31E24;
-            --primary-navy: #001530;
-            --text-grey: #666;
-        }
-
-        /* =========================================
-           SECTION 1: WHO WE ARE
-           ========================================= */
-        .who-we-are-section {
-            padding: 80px 0;
-            background: #fff;
-        }
-
-        .section-subtitle-red {
-            color: var(--primary-red);
-            font-weight: 700;
-            font-size: 1rem;
-            margin-bottom: 20px;
-            display: block;
-            letter-spacing: 1px;
-            font-family: 'Oswald', sans-serif;
-        }
-
-        .who-text p {
-            font-size: 0.95rem;
-            line-height: 1.8;
-            color: var(--text-grey);
-            margin-bottom: 25px;
-            text-align: justify;
-        }
-
-        /* مربع سنوات الخبرة */
-        .experience-box {
-            background-color: var(--primary-red);
-            color: #fff;
-            padding: 20px;
-            display: inline-block;
-            text-align: center;
-            font-weight: 700;
-            margin-top: 10px;
-            box-shadow: 0 10px 20px rgba(227, 30, 36, 0.2);
-            min-width: 160px;
-        }
-
-        .experience-box .years {
-            font-size: 2.5rem;
-            line-height: 1;
-            font-family: 'Oswald', sans-serif;
-            margin-bottom: 5px;
-        }
-
-        .experience-box .label {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* شبكة الصور */
-        .image-grid .row { margin-right: -5px; margin-left: -5px; }
-        .image-grid .col-6 { padding-right: 5px; padding-left: 5px; margin-bottom: 10px; }
-        
-        .grid-img {
-            width: 100%;
-            height: 160px;
-            object-fit: cover;
-            display: block;
-        }
-        
-        /* زر الفيديو */
-        .video-thumb { position: relative; cursor: pointer; }
-        .play-overlay {
-            position: absolute; top: 0; right: 0; width: 60px; height: 60px;
-            background: var(--primary-red); display: flex; align-items: center; justify-content: center;
-            color: #fff; font-size: 1.5rem; transition: 0.3s;
-        }
-        .play-overlay:hover { background: #b01217; }
-
-
-        /* =========================================
-           SECTION 2: FACTORY STATS (Dark Background)
-           ========================================= */
-        .stats-section {
-            position: relative;
-            /* استبدل الرابط أدناه بصورة المصنع الخاصة بك */
-            background-image: url('https://images.unsplash.com/photo-1486262715619-72a6075f1ed8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed; /* تثبيت الخلفية */
-            background-repeat: no-repeat;
-            padding: 100px 0;
-            color: #fff;
-            text-align: center;
-        }
-
-        /* طبقة التعتيم */
-        .stats-section::before {
-            content: "";
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.85); /* تعتيم قوي */
-            z-index: 1;
-        }
-
-        .stats-section .container { position: relative; z-index: 2; }
-
-        .stats-title { font-size: 2rem; font-weight: 700; margin-bottom: 50px; letter-spacing: 1px; }
-        .stats-sub-title { font-size: 2rem; font-weight: 700; margin: 60px 0 50px; letter-spacing: 1px; text-transform: uppercase; }
-
-        .stat-item { margin-bottom: 30px; }
-
-        .stat-icon { font-size: 3rem; color: var(--primary-red); margin-bottom: 20px; }
-        
-        /* جعل الأيقونات Outline */
-        .stat-icon i { -webkit-text-stroke: 1.5px var(--primary-red); color: transparent; }
-        /* استثناء لبعض الأيقونات لتكون Filled */
-        .stat-icon .fa-globe, .stat-icon .fa-users { -webkit-text-stroke: 0; color: var(--primary-red); }
-
-        .stat-number {
-            font-size: 1.5rem;
-            font-weight: 700;
-            font-family: 'Oswald', sans-serif;
-            margin-bottom: 8px;
-            color: #fff;
-        }
-
-        .stat-label { font-size: 0.8rem; text-transform: uppercase; color: #ccc; font-weight: 600; letter-spacing: 1px; }
-
-
-        /* =========================================
-           SECTION 3: DISTINCTION
-           ========================================= */
-        .distinction-section { padding: 90px 0; background: #fff; text-align: center; }
-        
-        .dist-subtitle {
-            color: var(--primary-red);
-            font-weight: 700;
-            font-size: 0.95rem;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            display: block;
-            font-family: 'Oswald', sans-serif;
-        }
-
-        .dist-title {
-            color: var(--primary-navy);
-            font-size: 2.5rem;
-            font-weight: 800;
-            line-height: 1.3;
-            margin-bottom: 35px;
-        }
-
-        .dist-text {
-            max-width: 850px;
-            margin: 0 auto;
-            color: var(--text-grey);
-            font-size: 1.05rem;
-            line-height: 1.7;
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .grid-img { height: 130px; }
-            .dist-title { font-size: 1.8rem; }
-            .stats-title, .stats-sub-title { font-size: 1.6rem; }
-            .experience-box { display: block; width: 100%; margin-bottom: 30px; }
-        }
-    </style>
-</head>
-<body>
-
-    <!-- =========================================
-         1. SECTION: WHO WE ARE
-         ========================================= -->
-    <section class="who-we-are-section">
-        <div class="container">
-            <div class="row align-items-center">
-                <!-- Text Column -->
-                <div class="col-lg-6 mb-5 mb-lg-0">
-                    <span class="section-subtitle-red">WHO WE ARE</span>
-                    
-                    <div class="who-text">
-                        <p>ASIMCO has earned an outstanding reputation for consistently delivering high-quality products. ASIMCO has meticulously crafted an extensive range of brake components, including brake pads, brake shoes, disc rotors, fuel pumps, brake fluids, horns, and shock absorbers. ASIMCO's unwavering dedication to quality has been a driving force behind its substantial growth in market share, with products now being sold in over 80 countries.</p>
-                        
-                        <p>A cornerstone of ASIMCO's success lies in its exceptional Research and Development, which is wholeheartedly committed to continuously refining and enhancing original formulas in ceramic, semi-metal, and low-metal materials.</p>
-                    </div>
-
-                    <div class="d-flex justify-content-center justify-content-lg-start">
-                         <div class="experience-box">
-                            <!-- Counter: Years Experience -->
-                            <div class="years counter" data-target="22" data-suffix=" +">0 +</div>
-                            <div class="label">YEARS EXPERIENCE</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Images Column -->
-                <div class="col-lg-6">
-                    <div class="image-grid">
-                        <div class="row">
-                            <div class="col-6"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=400&h=300" class="grid-img" alt="Factory 1"></div>
-                            <div class="col-6 video-thumb">
-                                <img src="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&w=400&h=300" class="grid-img" alt="Factory 2">
-                                <div class="play-overlay"><i class="fas fa-play"></i></div>
-                            </div>
-                            <div class="col-6"><img src="https://images.unsplash.com/photo-1531297461136-82bf88d8e935?auto=format&fit=crop&w=400&h=300" class="grid-img" alt="Factory 3"></div>
-                            <div class="col-6"><img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=400&h=300" class="grid-img" alt="Factory 4"></div>
-                            <div class="col-6"><img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=400&h=300" class="grid-img" alt="Factory 5"></div>
-                            <div class="col-6"><img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=400&h=300" class="grid-img" alt="Factory 6"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!-- =========================================
+SECTION 1: CSR INTRO (Text + Video)
+========================================= -->
+<section class="csr-intro-section">
+  <div class="container">
+    <div class="row align-items-center">
+      <!-- Text Column -->
+      <div class="col-lg-6 mb-4 mb-lg-0">
+        <h2 class="csr-main-title">
+          CORPORATE SOCIAL
+          <br>RESPONSIBILITY
+        </h2>
+        <div class="csr-text">
+          <p>
+            FIRST's Corporate Social Responsibility is not just a mission for its sustainable operation; it is a profound commitment to the enduring and harmonious development of society. Our responsibility extends beyond customers, partners, employees, and shareholders to encompass the sustainable progress of society, the environment, and essential resources.
+          </p>
+          <p>
+            FIRST diligently focuses on continuous value creation, ensuring a future that aligns with the harmonious and sustainable development of the planet we call home.
+          </p>
         </div>
-    </section>
-
-
-    <!-- =========================================
-         2. SECTION: FACTORY STATS
-         ========================================= -->
-    <section class="stats-section">
-        <div class="container">
-            <h2 class="stats-title">FIRST FACTORY STATS</h2>
-            
-            <div class="row justify-content-center">
-                <!-- Stat 1 -->
-                <div class="col-md-4 col-sm-6 stat-item">
-                    <div class="stat-icon"><i class="far fa-building"></i></div>
-                    <div class="stat-number counter" data-target="256000" data-suffix=" Sq Mtr">0 Sq Mtr</div>
-                    <div class="stat-label">OVERALL AREA</div>
-                </div>
-                <!-- Stat 2 -->
-                <div class="col-md-4 col-sm-6 stat-item">
-                    <div class="stat-icon"><i class="fas fa-file-signature"></i></div>
-                    <div class="stat-number counter" data-target="256000" data-suffix=" Sq Mtr">0 Sq Mtr</div>
-                    <div class="stat-label">BUILDING AREA</div>
-                </div>
-                <!-- Stat 3 -->
-                <div class="col-md-4 col-sm-6 stat-item">
-                    <div class="stat-icon"><i class="fas fa-users"></i></div>
-                    <div class="stat-number counter" data-target="1100" data-suffix=" +">0 +</div>
-                    <div class="stat-label">TOTAL EMPLOYEES</div>
-                </div>
-            </div>
-
-            <h2 class="stats-sub-title">YEARLY CAPACITY</h2>
-
-            <div class="row justify-content-center">
-                <!-- Capacity 1 -->
-                <div class="col-lg-3 col-6 stat-item">
-                    <div class="stat-icon"><i class="far fa-building"></i></div>
-                    <div class="stat-number counter" data-target="3.6" data-decimals="1" data-suffix=" Million Sets">0 Million Sets</div>
-                    <div class="stat-label">BRAKE SHOES</div>
-                </div>
-                <!-- Capacity 2 -->
-                <div class="col-lg-3 col-6 stat-item">
-                    <div class="stat-icon"><i class="fas fa-paste"></i></div>
-                    <div class="stat-number counter" data-target="15" data-suffix=" Million Sets">0 Million Sets</div>
-                    <div class="stat-label">BRAKE PADS</div>
-                </div>
-                <!-- Capacity 3 -->
-                <div class="col-lg-3 col-6 stat-item">
-                    <div class="stat-icon"><i class="fas fa-globe"></i></div>
-                    <div class="stat-number counter" data-target="80" data-suffix=" Million Pieces">0 Million Pieces</div>
-                    <div class="stat-label">ACCESSORIES</div>
-                </div>
-                <!-- Capacity 4 -->
-                <div class="col-lg-3 col-6 stat-item">
-                    <div class="stat-icon"><i class="fas fa-cogs"></i></div>
-                    <div class="stat-number counter" data-target="250" data-suffix=" Tools">0 Tools</div>
-                    <div class="stat-label">PRODUCT MODELS</div>
-                </div>
-            </div>
+      </div>
+      <!-- Video Column -->
+      <div class="col-lg-6">
+        <div class="video-wrapper">
+          <!-- استبدل الرابط برابط الفيديو الخاص بك -->
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
-    </section>
-
-
-    <!-- =========================================
-         3. SECTION: DISTINCTION
-         ========================================= -->
-    <section class="distinction-section">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-10">
-                    <span class="dist-subtitle">OVER TWO DECADES OF DISTINCTION</span>
-                    
-                    <h2 class="dist-title">
-                        ENCOMPASSING OVER 80 COUNTRIES<br>
-                        AND THE LEGACY CONTINUES
-                    </h2>
-
-                    <p class="dist-text">
-                        Taking a proactive stand on quality, ASIMCO maximizes its market share while enabling retailers to achieve brand excellence. We display unparalleled quality, reliability, and road safety, making us the number ONE choice for brake products. Whether you are an enthusiast or an everyday commuter, we bestow absolute on-road confidence with our brake products.
-                    </p>
-                </div>
-            </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- =========================================
+SECTION 2: ICONS STRIP (Dark)
+========================================= -->
+<section class="csr-icons-section">
+  <div class="csr-overlay">
+  </div>
+  <div class="container csr-icons-container">
+    <div class="five-col-grid">
+      <!-- Item 1 -->
+      <div class="icon-box-item">
+        <div class="icon">
+          <i class="far fa-heart">
+          </i>
         </div>
-    </section>
-
-    <!-- =========================================
-         JAVASCRIPT: COUNTER ANIMATION (No NaN)
-         ========================================= -->
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const counters = document.querySelectorAll('.counter');
-            
-            const startCounter = (counter) => {
-                const target = +counter.getAttribute('data-target');
-                const suffix = counter.getAttribute('data-suffix') || '';
-                const decimals = +counter.getAttribute('data-decimals') || 0;
-                
-                // مدة الانيميشن (ثانيتين)
-                const duration = 2000; 
-                let startTime = null;
-
-                const animate = (currentTime) => {
-                    if (!startTime) startTime = currentTime;
-                    const progress = currentTime - startTime;
-                    
-                    const percentage = Math.min(progress / duration, 1);
-                    const currentCount = percentage * target;
-
-                    // تنسيق الرقم لضمان عدم ظهور NaN
-                    counter.innerText = currentCount.toLocaleString('en-US', {
-                        minimumFractionDigits: decimals,
-                        maximumFractionDigits: decimals
-                    }) + suffix;
-
-                    if (progress < duration) {
-                        requestAnimationFrame(animate);
-                    } else {
-                        // التأكد من النهاية الصحيحة
-                        counter.innerText = target.toLocaleString('en-US', {
-                            minimumFractionDigits: decimals,
-                            maximumFractionDigits: decimals
-                        }) + suffix;
-                    }
-                };
-                
-                requestAnimationFrame(animate);
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const counter = entry.target;
-                        startCounter(counter);
-                        observer.unobserve(counter); // إيقاف المراقبة لمنع إعادة العد أو التصفير
-                    }
-                });
-            }, {
-                threshold: 0.5
-            });
-
-            counters.forEach(counter => {
-                observer.observe(counter);
-            });
-        });
-    </script>
-
-</body>
-</html>
+        <h4>FIRST CARES
+        </h4>
+        <p>Pioneering the well-being of automotive communities worldwide, setting new standards in sustainable initiatives.
+        </p>
+      </div>
+      <!-- Item 2 -->
+      <div class="icon-box-item">
+        <div class="icon">
+          <i class="fas fa-hard-hat">
+          </i>
+        </div>
+        <h4>SAFETY FIRST
+        </h4>
+        <p>As a manufacturing enterprise specializing in "safety parts", our unwavering commitment to ensuring safety stands paramount.
+        </p>
+      </div>
+      <!-- Item 3 -->
+      <div class="icon-box-item">
+        <div class="icon">
+          <i class="fas fa-leaf">
+          </i>
+        </div>
+        <h4>ENVIRONMENT FRIENDLY
+        </h4>
+        <p>Embracing the green business philosophy, our commitment is to actively champion sustainable development.
+        </p>
+      </div>
+      <!-- Item 4 -->
+      <div class="icon-box-item">
+        <div class="icon">
+          <i class="fas fa-bolt">
+          </i>
+        </div>
+        <h4>ENERGY SAVING
+        </h4>
+        <p>Adopting a strategic approach focused on "maximizing resource benefits throughout the entire process".
+        </p>
+      </div>
+      <!-- Item 5 -->
+      <div class="icon-box-item">
+        <div class="icon">
+          <i class="fas fa-handshake">
+          </i>
+        </div>
+        <h4>MUTUAL GROWTH
+        </h4>
+        <p>Encouraging the synergistic utilization of resources, cultivate shared value, and collectively achieve common objectives.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- =========================================
+SECTION 3: FIRST CARES (Gallery)
+========================================= -->
+<section class="FIRST-cares-section">
+  <div class="container">
+    <div class="row">
+      <!-- Text Column -->
+      <div class="col-lg-6 mb-4 mb-lg-0">
+        <h2 class="cares-title">
+          FIRST CARES: PIONEERING WELL-BEING FOR AUTOMOTIVE COMMUNITIES WORLDWIDE
+        </h2>
+        <div class="cares-text">
+          <p>
+            At FIRST, we take great pride in our distinguished legacy of over two decades in the manufacturing of brake products, steadfastly prioritizing safety as the cornerstone of our operations. The remarkable journey we've undertaken towards success has been made possible through the unwavering support of our dedicated stakeholders.
+          </p>
+          <p>
+            In a demonstration of our enduring commitment to corporate social responsibility and gratitude towards our esteemed partners, we established FIRST Cares Health Outreach program. This initiative is designed to promote the well-being of the automotive community, specifically targeting auto mechanics and retailers.
+          </p>
+          <p>
+            As we embark on this impactful journey, it is our vision to extend the FIRST Cares Health Outreach program beyond borders. Our commitment to the welfare of those who contribute to our shared success will resonate not only in Nigeria but also in various countries across the globe.
+          </p>
+        </div>
+      </div>
+      <!-- Gallery Column -->
+      <div class="col-lg-6">
+        <div class="gallery-grid">
+          <!-- ضع روابط صورك هنا -->
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=300&h=200" alt="Gallery 1">
+          </div>
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1576091160550-2187d80a02ff?auto=format&fit=crop&w=300&h=200" alt="Gallery 2">
+          </div>
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=300&h=200" alt="Gallery 3">
+          </div>
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=300&h=200" alt="Gallery 4">
+          </div>
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=300&h=200" alt="Gallery 5">
+          </div>
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=300&h=200" alt="Gallery 6">
+          </div>
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=300&h=200" alt="Gallery 7">
+          </div>
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=300&h=200" alt="Gallery 8">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  /* =========================================
+  GLOBAL STYLES
+  ========================================= */
+  body {
+    font-family: 'Open Sans', sans-serif;
+    color: #555;
+    overflow-x: hidden;
+  }
+  h2, h3, h4 {
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+  }
+  :root {
+    --primary-red: #25D06F;
+    --primary-navy: #001530;
+    --text-grey: #666;
+  }
+  /* =========================================
+  SECTION 1: CSR INTRO (Video + Text)
+  ========================================= */
+  .csr-intro-section {
+    padding: 80px 0;
+    background: #fff;
+  }
+  .csr-main-title {
+    font-size: 2.5rem;
+    color: var(--primary-navy);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 30px;
+  }
+  .csr-text p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text-grey);
+    text-align: justify;
+  }
+  /* حاوية الفيديو */
+  .video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    /* نسبة 16:9 */
+    height: 0;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  }
+  .video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  /* =========================================
+  SECTION 2: ICONS STRIP (Dark Background)
+  ========================================= */
+  .csr-icons-section {
+    position: relative;
+    /* صورة خلفية داكنة (محرك أو مصنع) */
+    background-image: url('https://images.unsplash.com/photo-1486262715619-72a6075f1ed8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    padding: 80px 0;
+    color: #fff;
+  }
+  .csr-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    /* تعتيم قوي جداً ليطابق الصورة */
+    z-index: 1;
+  }
+  .csr-icons-container {
+    position: relative;
+    z-index: 2;
+  }
+  /* Grid System for 5 items */
+  .five-col-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 30px;
+    text-align: center;
+  }
+  .icon-box-item .icon {
+    font-size: 3rem;
+    color: var(--primary-red);
+    margin-bottom: 20px;
+  }
+  /* جعل الأيقونات Outline */
+  .icon-box-item .icon i {
+    /* خدعة لجعل الأيقونة تبدو مفرغة إذا لم تكن كذلك */
+    -webkit-text-stroke: 1px var(--primary-red);
+    color: transparent;
+  }
+  /* استثناء لأيقونة القلب واليد */
+  .fa-heart, .fa-handshake {
+    -webkit-text-stroke: 0 !important;
+    color: var(--primary-red) !important;
+  }
+  .icon-box-item h4 {
+    font-size: 1rem;
+    color: var(--primary-red);
+    font-weight: 700;
+    margin-bottom: 15px;
+    letter-spacing: 0.5px;
+  }
+  .icon-box-item p {
+    font-size: 0.8rem;
+    color: #ccc;
+    line-height: 1.5;
+  }
+  /* =========================================
+  SECTION 3: ASIMCO CARES (Gallery)
+  ========================================= */
+  .asimco-cares-section {
+    padding: 80px 0;
+    background: #fff;
+  }
+  .cares-title {
+    font-size: 1.8rem;
+    color: var(--primary-navy);
+    font-weight: 800;
+    margin-bottom: 30px;
+    line-height: 1.3;
+  }
+  .cares-text p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--text-grey);
+    margin-bottom: 20px;
+    text-align: justify;
+  }
+  /* شبكة الصور */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* عمودين */
+    gap: 15px;
+    /* مسافة بين الصور */
+  }
+  .gallery-item {
+    height: 150px;
+    /* ارتفاع ثابت للصور */
+    width: 100%;
+    overflow: hidden;
+  }
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  .gallery-item:hover img {
+    transform: scale(1.05);
+  }
+  /* RESPONSIVE */
+  @media (max-width: 991px) {
+    .five-col-grid {
+      grid-template-columns: repeat(2, 1fr);
+      /* عمودين في التابلت */
+    }
+  }
+  @media (max-width: 576px) {
+    .five-col-grid {
+      grid-template-columns: 1fr;
+      /* عمود واحد في الجوال */
+    }
+    .gallery-grid {
+      grid-template-columns: 1fr;
+      /* عمود واحد للصور في الجوال */
+    }
+    .gallery-item {
+      height: 200px;
+    }
+    .csr-main-title {
+      font-size: 2rem;
+    }
+  }
+</style>

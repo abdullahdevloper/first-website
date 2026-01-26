@@ -84,7 +84,7 @@
         arrows: true,
         infinite: true,
         speed: 300,
-        autoplay: false,
+        autoplay: true,
         slidesToShow: 3,
         slidesToScroll: 1,
         rtl: rtl == 1 ? true : false,

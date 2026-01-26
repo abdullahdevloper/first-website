@@ -47,189 +47,206 @@
     @endif --}}
 
 
-  <style>
-    
-    /* تنسيقات القسم العامة والخلفية */
-    .modern-showroom-section {
-                background-image: url('{{ asset('assets/front/img/product/featured/' . $products[0]->feature_image) }}');
+    <style>
+        /* تنسيقات القسم العامة والخلفية */
+        .modern-showroom-section {
+            background-image: url('{{ asset('assets/front/img/product/featured/' . $products[0]->feature_image) }}');
 
-        position: relative;
-        padding: 80px 0;
-        /* يفضل استبدال الرابط أدناه بصورة المصنع الداكنة الموجودة لديك */
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
+            position: relative;
+            padding: 80px 0;
+            /* يفضل استبدال الرابط أدناه بصورة المصنع الداكنة الموجودة لديك */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
 
-    /* طبقة تعتيم فوق الخلفية */
-    .modern-showroom-section::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.85); /* درجة التعتيم */
-        z-index: 1;
-    }
+        /* طبقة تعتيم فوق الخلفية */
+        .modern-showroom-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            /* درجة التعتيم */
+            z-index: 1;
+        }
 
-    .modern-showroom-section .container {
-        position: relative;
-        z-index: 2;
-    }
+        .modern-showroom-section .container {
+            position: relative;
+            z-index: 2;
+        }
 
-    /* تنسيقات العناوين */
-    .section-subtitle {
-        color: #25D06F; /* اللون الأحمر */
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        font-size: 1.2rem;
-        margin-bottom: 10px;
-        display: block;
-    }
+        /* تنسيقات العناوين */
+        .section-subtitle {
+            color: #25D06F;
+            /* اللون الأحمر */
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            display: block;
+        }
 
-    .section-title {
-        color: #ffffff;
-        font-weight: 600;
-        text-transform: uppercase;
-        font-size: 24px;
-        margin-bottom: 50px;
-        font-family: 'IBM Plex Sans Arabic', sans-serif; /* خط مقترح للعناوين الضخمة */
-    }
+        .section-title {
+            color: #ffffff;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 24px;
+            margin-bottom: 50px;
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+            /* خط مقترح للعناوين الضخمة */
+        }
 
-    /* تنسيقات بطاقة المنتج */
-    .product-card-redesign {
-        background: #fff;
-        border-radius: 8px;
-        padding: 20px;
-        text-align: center;
-        transition: transform 0.3s ease;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        margin: 0 10px; /* مسافة بين الكروت */
-    }
+        /* تنسيقات بطاقة المنتج */
+        .product-card-redesign {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin: 0 10px;
+            /* مسافة بين الكروت */
+        }
 
-    .product-card-redesign:hover {
-        transform: translateY(-5px);
-    }
+        .product-card-redesign:hover {
+            transform: translateY(-5px);
+        }
 
-    .product-card-redesign .image-box {
-        height: 200px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 20px;
-    }
+        .product-card-redesign .image-box {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
 
-    .product-card-redesign .image-box img {
-        max-width: 100%;
-        max-height: 100%;
-        object-fit: contain;
-    }
+        .product-card-redesign .image-box img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
 
-    .product-card-redesign h4 {
-        color: #001530; /* لون كحلي غامق للنصوص */
-        font-weight: 700;
-        text-transform: uppercase;
-        font-size: 1.1rem;
-        margin: 0;
-    }
+        .product-card-redesign h4 {
+            color: #001530;
+            /* لون كحلي غامق للنصوص */
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 1.1rem;
+            margin: 0;
+        }
 
-    /* أزرار التنقل (الأسهم الحمراء) */
-    .custom-nav-btn {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 50px;
-        height: 50px;
-        background-color: #25D06F;
-        color: white;
-        border: none;
-        font-size: 1.2rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        z-index: 10;
-        transition: background 0.3s;
-    }
+        /* أزرار التنقل (الأسهم الحمراء) */
+        .custom-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background-color: #25D06F;
+            color: white;
+            border: none;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: background 0.3s;
+        }
 
-    .custom-nav-btn:hover {
-        background-color: #25D06F;
-    }
+        .custom-nav-btn:hover {
+            background-color: #25D06F;
+        }
 
-    .custom-prev { left: -60px; }
-    .custom-next { right: -60px; }
+        .custom-prev {
+            left: -60px;
+        }
 
-    /* تعديل وضعية الأسهم للشاشات الصغيرة */
-    @media (max-width: 991px) {
-        .custom-prev { left: 0; }
-        .custom-next { right: 0; }
-        .slider-wrapper { padding: 0 40px; }
-    }
-</style>
+        .custom-next {
+            right: -60px;
+        }
 
-<section class="modern-showroom-section">
-    <div class="container">
-        
-        {{-- قسم العناوين في المنتصف --}}
-        <div class="text-center">
-            @php
-                $productSubtitleBlocks = array_map('trim', explode('#', convertUtf8($be->product_subtitle)));
-            @endphp
-            
-            {{-- العنوان الفرعي الأحمر: OUR PRODUCTS --}}
-            <span class="section-subtitle">{{ convertUtf8($be->product_title) }}</span>
-            
-            {{-- العنوان الرئيسي الأبيض: THE REFLECTION OF PERFECTION --}}
-            <h2 class="section-title">
-                {{ $productSubtitleBlocks[0] ?? '' }}
-            </h2>
-        </div>
+        /* تعديل وضعية الأسهم للشاشات الصغيرة */
+        @media (max-width: 991px) {
+            .custom-prev {
+                left: 0;
+            }
 
-        {{-- سلايدر المنتجات --}}
-        <div class="slider-wrapper position-relative">
-            
-            <div id="modernProductSlider" class="product-showcase-slider owl-carousel">
-                @foreach ($products as $product)
-                    <div class="showcase-item">
-                        <div class="product-card-redesign shadow-sm">
-                            <a href="{{ route('front.product.details', $product->slug) }}" class="text-decoration-none">
-                                <div class="image-box">
-                                    <img src="{{ asset('assets/front/img/product/featured/' . $product->feature_image) }}"
-                                         alt="{{ $product->title }}">
-                                </div>
-                                <h4>{{ $product->title }}</h4>
-                            </a>
-                        </div>
-                    </div>
-                @endforeach
-                 @foreach ($products as $product)
-                    <div class="showcase-item">
-                        <div class="product-card-redesign shadow-sm">
-                            <a href="{{ route('front.product.details', $product->slug) }}" class="text-decoration-none">
-                                <div class="image-box">
-                                    <img src="{{ asset('assets/front/img/product/featured/' . $product->feature_image) }}"
-                                         alt="{{ $product->title }}">
-                                </div>
-                                <h4>{{ $product->title }}</h4>
-                            </a>
-                        </div>
-                    </div>
-                @endforeach
+            .custom-next {
+                right: 0;
+            }
+
+            .slider-wrapper {
+                padding: 0 40px;
+            }
+        }
+    </style>
+
+    <section class="modern-showroom-section">
+        <div class="container">
+
+            {{-- قسم العناوين في المنتصف --}}
+            <div class="text-center">
+                @php
+                    $productSubtitleBlocks = array_map('trim', explode('#', convertUtf8($be->product_subtitle)));
+                @endphp
+
+                {{-- العنوان الفرعي الأحمر: OUR PRODUCTS --}}
+                <span class="section-subtitle">{{ convertUtf8($be->product_title) }}</span>
+
+                {{-- العنوان الرئيسي الأبيض: THE REFLECTION OF PERFECTION --}}
+                <h2 class="section-title">
+                    {{ $productSubtitleBlocks[0] ?? '' }}
+                </h2>
             </div>
 
-            {{-- أزرار التحكم --}}
-            <button class="custom-nav-btn custom-prev"><i class="fas fa-chevron-left"></i></button>
-            <button class="custom-nav-btn custom-next"><i class="fas fa-chevron-right"></i></button>
-            
-        </div>
+            {{-- سلايدر المنتجات --}}
+            <div class="slider-wrapper position-relative">
 
-    </div>
-</section>
+                <div id="modernProductSlider" class="product-showcase-slider owl-carousel">
+                    @foreach ($products as $product)
+                        <div class="showcase-item">
+                            <div class="product-card-redesign shadow-sm">
+                                <a href="{{ route('front.product.details', $product->slug) }}" class="text-decoration-none">
+                                    <div class="image-box">
+                                        <img src="{{ asset('assets/front/img/product/featured/' . $product->feature_image) }}"
+                                            alt="{{ $product->title }}">
+                                    </div>
+                                    <h4>{{ $product->title }}</h4>
+                                </a>
+                            </div>
+                        </div>
+                    @endforeach
+                    @foreach ($products as $product)
+                        <div class="showcase-item">
+                            <div class="product-card-redesign shadow-sm">
+                                <a href="{{ route('front.product.details', $product->slug) }}" class="text-decoration-none">
+                                    <div class="image-box">
+                                        <img src="{{ asset('assets/front/img/product/featured/' . $product->feature_image) }}"
+                                            alt="{{ $product->title }}">
+                                    </div>
+                                    <h4>{{ $product->title }}</h4>
+                                </a>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+                {{-- أزرار التحكم --}}
+                <button class="custom-nav-btn custom-prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="custom-nav-btn custom-next"><i class="fas fa-chevron-right"></i></button>
+
+            </div>
+
+        </div>
+    </section>
 
 
     <!-- Start finlance_about section -->
@@ -268,330 +285,381 @@
             </div>
         </section> --}}
         {{-- new rejected design --}}
-      <style>
-    /* =========================================
-       تنسيقات الشاشات الكبيرة (Desktop)
-       ========================================= */
-    .about-corporate-section-redesign {
-        padding: 80px 0;
-        background-color: #fff;
-    }
+        <style>
+            /* =========================================
+           تنسيقات الشاشات الكبيرة (Desktop)
+           ========================================= */
+            .about-corporate-section-redesign {
+                padding: 80px 0;
+                background-color: #fff;
+            }
 
-    .identity-label-red {
-        color: #25D06F; /* أحمر */
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        font-size: 1rem;
-        display: block;
-        margin-bottom: 15px;
-        font-family: sans-serif;
-    }
+            .identity-label-red {
+                color: #25D06F;
+                /* أحمر */
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                font-size: 1rem;
+                display: block;
+                margin-bottom: 15px;
+                font-family: sans-serif;
+            }
 
-    .main-heading-dark {
-        color: #001530; /* كحلي غامق */
-        font-weight: 800;
-        text-transform: uppercase;
-        font-size: 2.2rem;
-        line-height: 1.2;
-        margin-bottom: 25px;
-        font-family: 'Oswald', sans-serif; /* يفضل خط Oswald أو Impact */
-    }
+            .main-heading-dark {
+                color: #001530;
+                /* كحلي غامق */
+                font-weight: 800;
+                text-transform: uppercase;
+                font-size: 2.2rem;
+                line-height: 1.2;
+                margin-bottom: 25px;
+                font-family: 'Oswald', sans-serif;
+                /* يفضل خط Oswald أو Impact */
+            }
 
-    .company-brief-text {
-        color: #6c757d; /* رمادي */
-        font-size: 1rem;
-        line-height: 1.6;
-        margin-bottom: 35px;
-        text-align: justify; /* في الديسكتوب يمكن تركه justify أو تغييره */
-    }
+            .company-brief-text {
+                color: #6c757d;
+                /* رمادي */
+                font-size: 1rem;
+                line-height: 1.6;
+                margin-bottom: 35px;
+                text-align: justify;
+                /* في الديسكتوب يمكن تركه justify أو تغييره */
+            }
 
-    /* تنسيق الزر الأساسي */
-    .btn-outline-red {
-        display: inline-block;
-        padding: 12px 40px; /* عرض مريح للنص */
-        background-color: transparent;
-        border: 2px solid #25D06F; /* إطار أحمر */
-        color: #25D06F;
-        font-weight: 800;
-        text-transform: uppercase;
-        font-size: 0.9rem;
-        transition: all 0.3s ease;
-        text-decoration: none;
-        letter-spacing: 0.5px;
-        text-align: center;
-        min-width: 180px; /* لضمان عرض مناسب للزر */
-    }
+            /* تنسيق الزر الأساسي */
+            .btn-outline-red {
+                display: inline-block;
+                padding: 12px 40px;
+                /* عرض مريح للنص */
+                background-color: transparent;
+                border: 2px solid #25D06F;
+                /* إطار أحمر */
+                color: #25D06F;
+                font-weight: 800;
+                text-transform: uppercase;
+                font-size: 0.9rem;
+                transition: all 0.3s ease;
+                text-decoration: none;
+                letter-spacing: 0.5px;
+                text-align: center;
+                min-width: 180px;
+                /* لضمان عرض مناسب للزر */
+            }
 
-    .btn-outline-red:hover {
-        background-color: #25D06F;
-        color: #fff;
-        text-decoration: none;
-    }
+            .btn-outline-red:hover {
+                background-color: #25D06F;
+                color: #fff;
+                text-decoration: none;
+            }
 
-    /* تنسيقات الفيديو (للشاشات الكبيرة فقط) */
-    .video-wrapper {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        min-height: 350px;
-        background-color: #000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-    }
-    .video-cover-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; }
-    .play-icon-centered {
-        position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-        font-size: 3rem; color: #25D06F; background: #fff; border-radius: 50%;
-        width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; padding-left: 5px;
-    }
+            /* تنسيقات الفيديو (للشاشات الكبيرة فقط) */
+            .video-wrapper {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                min-height: 350px;
+                background-color: #000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+            }
 
-    /* =========================================
-       تنسيقات وضع الهاتف (Mobile View) - مطابق للصورة
-       ========================================= */
-    @media (max-width: 991px) {
-        .about-corporate-section-redesign {
-            padding: 40px 0; /* تقليل الحاشية العلوية والسفلية */
-        }
+            .video-cover-img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                opacity: 0.8;
+            }
 
-        /* 1. ضبط محاذاة النصوص لليسار كما في الصورة */
-        .about-info-content {
-            text-align: left !important;
-            padding-right: 0;
-        }
+            .play-icon-centered {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 3rem;
+                color: #25D06F;
+                background: #fff;
+                border-radius: 50%;
+                width: 70px;
+                height: 70px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding-left: 5px;
+            }
 
-        .identity-label-red {
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-        }
+            /* =========================================
+           تنسيقات وضع الهاتف (Mobile View) - مطابق للصورة
+           ========================================= */
+            @media (max-width: 991px) {
+                .about-corporate-section-redesign {
+                    padding: 40px 0;
+                    /* تقليل الحاشية العلوية والسفلية */
+                }
 
-        /* 2. تكبير العنوان وضبط المسافات */
-        .main-heading-dark {
-            font-size: 1.8rem; /* حجم كبير وواضح */
-            line-height: 1.3;
-            margin-bottom: 20px;
-        }
+                /* 1. ضبط محاذاة النصوص لليسار كما في الصورة */
+                .about-info-content {
+                    text-align: left !important;
+                    padding-right: 0;
+                }
 
-        /* 3. النص الوصفي: إلغاء Justify ليكون Ragged Right مثل الصورة */
-        .company-brief-text {
-            text-align: left; 
-            font-size: 0.95rem;
-            color: #777; /* تفتيح اللون قليلاً ليطابق الرمادي في الصورة */
-            margin-bottom: 30px;
-        }
+                .identity-label-red {
+                    font-size: 0.9rem;
+                    margin-bottom: 10px;
+                }
 
-        /* 4. الزر: ضبط الحجم ليكون مستطيل واضح */
-        .btn-outline-red {
-            padding: 14px 30px;
-            font-size: 0.85rem;
-            width: auto; /* ليس كامل العرض، بل حسب المحتوى */
-            display: inline-block;
-        }
-    }
-</style>
+                /* 2. تكبير العنوان وضبط المسافات */
+                .main-heading-dark {
+                    font-size: 1.8rem;
+                    /* حجم كبير وواضح */
+                    line-height: 1.3;
+                    margin-bottom: 20px;
+                }
 
-<section class="about-corporate-section-redesign">
-    <div class="container">
-        <div class="row align-items-center">
-            
-            @php
-                $introSectionTextBlocks = array_map('trim', explode('#', convertUtf8($bs->intro_section_text)));
-            @endphp
+                /* 3. النص الوصفي: إلغاء Justify ليكون Ragged Right مثل الصورة */
+                .company-brief-text {
+                    text-align: left;
+                    font-size: 0.95rem;
+                    color: #777;
+                    /* تفتيح اللون قليلاً ليطابق الرمادي في الصورة */
+                    margin-bottom: 30px;
+                }
 
-            <div class="col-lg-6">
-                <div class="about-info-content">
-                    
-                    {{-- العنوان الفرعي --}}
-                    <span class="identity-label-red">{{ convertUtf8($bs->intro_section_title) }}</span>
-                    
-                    {{-- العنوان الرئيسي --}}
-                    <h2 class="main-heading-dark">{{ $introSectionTextBlocks[0] ?? '' }}</h2>
+                /* 4. الزر: ضبط الحجم ليكون مستطيل واضح */
+                .btn-outline-red {
+                    padding: 14px 30px;
+                    font-size: 0.85rem;
+                    width: auto;
+                    /* ليس كامل العرض، بل حسب المحتوى */
+                    display: inline-block;
+                }
+            }
+        </style>
 
-                    {{-- النص --}}
-                    <p class="company-brief-text">
-                        FIRST has earned an outstanding reputation as a trusted automotive parts manufacturer and supplier for consistently delivering high-quality products. With over two decades of excellence, FIRST offers an extensive range of components, including brake pads, brake shoes, brake discs, fuel pumps, brake fluids, horns, and shock absorbers. Recognized among the leading automotive component manufacturers and auto parts distributors, FIRST products are now sold in over 80 countries worldwide.
-                    </p>
+        <section class="about-corporate-section-redesign">
+            <div class="container">
+                <div class="row align-items-center">
 
-                    {{-- الزر --}}
-                    @if (!empty($bs->intro_section_button_url) && !empty($bs->intro_section_button_text))
-                        <div class="about-action-area">
-                            <a href="{{ $bs->intro_section_button_url }}" class="btn-outline-red">
-                                {{ convertUtf8($bs->intro_section_button_text) }}
+                    @php
+                        $introSectionTextBlocks = array_map('trim', explode('#', convertUtf8($bs->intro_section_text)));
+                    @endphp
+
+                    <div class="col-lg-6">
+                        <div class="about-info-content">
+
+                            {{-- العنوان الفرعي --}}
+                            <span class="identity-label-red">{{ convertUtf8($bs->intro_section_title) }}</span>
+
+                            {{-- العنوان الرئيسي --}}
+                            <h2 class="main-heading-dark">{{ $introSectionTextBlocks[0] ?? '' }}</h2>
+
+                            {{-- النص --}}
+                            <p class="company-brief-text">
+                                FIRST has earned an outstanding reputation as a trusted automotive parts manufacturer and
+                                supplier for consistently delivering high-quality products. With over two decades of
+                                excellence, FIRST offers an extensive range of components, including brake pads, brake
+                                shoes, brake discs, fuel pumps, brake fluids, horns, and shock absorbers. Recognized among
+                                the leading automotive component manufacturers and auto parts distributors, FIRST products
+                                are now sold in over 80 countries worldwide.
+                            </p>
+
+                            {{-- الزر --}}
+                            @if (!empty($bs->intro_section_button_url) && !empty($bs->intro_section_button_text))
+                                <div class="about-action-area">
+                                    <a href="{{ $bs->intro_section_button_url }}" class="btn-outline-red">
+                                        {{ convertUtf8($bs->intro_section_button_text) }}
+                                    </a>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+
+                    {{-- الفيديو مخفي في الجوال (d-none) ويظهر في الشاشات الكبيرة (d-lg-block) --}}
+                    <div class="col-lg-6 d-none d-lg-block">
+                        <div class="video-wrapper">
+                            <img src="{{ asset('assets/front/img/' . $bs->intro_bg) }}" class="video-cover-img"
+                                alt="">
+                            <a href="{{ $bs->intro_section_video_link }}" class="play_btn play-icon-centered"
+                                target="_blank">
+                                <i class="fas fa-play"></i>
                             </a>
                         </div>
-                    @endif
+                    </div>
+
                 </div>
             </div>
-
-            {{-- الفيديو مخفي في الجوال (d-none) ويظهر في الشاشات الكبيرة (d-lg-block) --}}
-            <div class="col-lg-6 d-none d-lg-block">
-                <div class="video-wrapper">
-                    <img src="{{ asset('assets/front/img/' . $bs->intro_bg) }}" class="video-cover-img" alt="">
-                    <a href="{{ $bs->intro_section_video_link }}" class="play_btn play-icon-centered" target="_blank">
-                        <i class="fas fa-play"></i>
-                    </a>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
+        </section>
     @endif
     <!-- End finlance_about section -->
 
     <style>
-    /* =========================================
-       تنسيقات القسم الخلفية والمحتوى
-       ========================================= */
-    .quality-assurance-section {
-        position: relative;
-        /* ضع مسار صورتك هنا */
-        background-image: url('{{ asset('assets/front/img/product/featured/' . $products[0]->feature_image) }}');
-        background-size: cover;
-        background-position: center center;
-        background-repeat: no-repeat;
-        /* هذه الخاصية تجعل الخلفية ثابتة أثناء التمرير (تأثير فاخر) اختياري */
-        background-attachment: fixed; 
-        padding: 120px 0; /* مساحة كبيرة كما في الصورة */
-        text-align: center;
-        color: #fff;
-    }
-
-    /* طبقة التعتيم السوداء (Overlay) */
-    .quality-assurance-section::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        /* درجة التعتيم 0.85 لتكون داكنة جداً مثل الصورة */
-        background: rgba(0, 0, 0, 0.85); 
-        z-index: 1;
-    }
-
-    .quality-assurance-section .container {
-        position: relative;
-        z-index: 2;
-    }
-
-    /* 1. العنوان الفرعي الأحمر */
-    .quality-subtitle {
-        color: #25D06F; /* نفس درجة الأحمر في الصورة */
-        font-weight: 700;
-        text-transform: uppercase;
-        font-size: 1.1rem;
-        letter-spacing: 1px;
-        margin-bottom: 10px;
-        display: block;
-        font-family: sans-serif;
-    }
-
-    /* 2. العنوان الرئيسي الأبيض */
-    .quality-title {
-        color: #ffffff;
-        font-weight: 800;
-        text-transform: uppercase;
-        font-size: 3.5rem; /* حجم ضخم للديسكتوب */
-        line-height: 1.1;
-        margin-bottom: 30px;
-        font-family: 'Oswald', sans-serif; /* يفضل استخدام خط Oswald */
-    }
-
-    /* 3. النص الوصفي */
-    .quality-desc {
-        color: #e0e0e0; /* أبيض مائل للرمادي قليلاً */
-        font-size: 1.15rem;
-        line-height: 1.6;
-        margin: 0 auto 50px auto;
-        max-width: 900px; /* عرض مناسب للقراءة */
-    }
-
-    /* 4. الزر الأحمر */
-    .btn-solid-red {
-        display: inline-block;
-        background-color: #25D06F;
-        color: #fff;
-        padding: 18px 50px; /* زر كبير وضخم */
-        font-weight: 800;
-        text-transform: uppercase;
-        font-size: 1rem;
-        text-decoration: none;
-        transition: all 0.3s ease;
-        border: none;
-        letter-spacing: 1px;
-    }
-
-    .btn-solid-red:hover {
-        background-color: #c41318;
-        color: #fff;
-        transform: translateY(-2px);
-    }
-
-    /* =========================================
-       تنسيقات وضع الهاتف (Mobile View)
-       ========================================= */
-    @media (max-width: 767px) {
+        /* =========================================
+           تنسيقات القسم الخلفية والمحتوى
+           ========================================= */
         .quality-assurance-section {
-            padding: 70px 0;
-            background-attachment: scroll; /* إلغاء التثبيت في الجوال لتحسين الأداء */
+            position: relative;
+            /* ضع مسار صورتك هنا */
+            background-image: url('{{ asset('assets/front/img/product/featured/' . $products[0]->feature_image) }}');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            /* هذه الخاصية تجعل الخلفية ثابتة أثناء التمرير (تأثير فاخر) اختياري */
+            background-attachment: fixed;
+            padding: 120px 0;
+            /* مساحة كبيرة كما في الصورة */
+            text-align: center;
+            color: #fff;
         }
 
+        /* طبقة التعتيم السوداء (Overlay) */
+        .quality-assurance-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* درجة التعتيم 0.85 لتكون داكنة جداً مثل الصورة */
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 1;
+        }
+
+        .quality-assurance-section .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* 1. العنوان الفرعي الأحمر */
         .quality-subtitle {
-            font-size: 0.85rem;
-            margin-bottom: 8px;
+            color: #25D06F;
+            /* نفس درجة الأحمر في الصورة */
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: block;
+            font-family: sans-serif;
         }
 
+        /* 2. العنوان الرئيسي الأبيض */
         .quality-title {
-            font-size: 1.8rem; /* تصغير العنوان للجوال */
-            line-height: 1.2;
-            margin-bottom: 20px;
-        }
-
-        .quality-desc {
-            font-size: 0.95rem;
-            line-height: 1.5;
-            padding: 0 15px; /* حماية النص من الحواف */
+            color: #ffffff;
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 3.5rem;
+            /* حجم ضخم للديسكتوب */
+            line-height: 1.1;
             margin-bottom: 30px;
+            font-family: 'Oswald', sans-serif;
+            /* يفضل استخدام خط Oswald */
         }
 
+        /* 3. النص الوصفي */
+        .quality-desc {
+            color: #e0e0e0;
+            /* أبيض مائل للرمادي قليلاً */
+            font-size: 1.15rem;
+            line-height: 1.6;
+            margin: 0 auto 50px auto;
+            max-width: 900px;
+            /* عرض مناسب للقراءة */
+        }
+
+        /* 4. الزر الأحمر */
         .btn-solid-red {
-            padding: 15px 40px;
-            font-size: 0.9rem;
-            width: auto;
+            display: inline-block;
+            background-color: #25D06F;
+            color: #fff;
+            padding: 18px 50px;
+            /* زر كبير وضخم */
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            letter-spacing: 1px;
         }
-    }
-</style>
 
-<section class="quality-assurance-section">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-10 text-center">
-                
-                {{-- العنوان الفرعي --}}
-                <span class="quality-subtitle">PREMIUM BRAKE PRODUCTS PROVIDER</span>
-                
-                {{-- العنوان الرئيسي --}}
-                <h2 class="quality-title">WE TAKE QUALITY VERY SERIOUSLY</h2>
-                
-                {{-- النص الوصفي --}}
-                <p class="quality-desc">
-                    FIRST is committed to providing high-quality products and offers an automotive parts and components for global markets. Our range includes premium brake pads, brake shoes, brake discs, fuel pumps, and shock absorbers. As a reliable automotive parts supplier and distributor, we ensure durable performance tested for every road condition. Trusted by drivers and businesses alike, FIRST stands among the top automotive parts wholesalers in the Middle East and beyond.
-                </p>
+        .btn-solid-red:hover {
+            background-color: #c41318;
+            color: #fff;
+            transform: translateY(-2px);
+        }
 
-                {{-- الزر --}}
-                <a href="https://first-parts.com/portfolios" class="btn-solid-red">KNOW MORE</a>
-                
+        /* =========================================
+           تنسيقات وضع الهاتف (Mobile View)
+           ========================================= */
+        @media (max-width: 767px) {
+            .quality-assurance-section {
+                padding: 70px 0;
+                background-attachment: scroll;
+                /* إلغاء التثبيت في الجوال لتحسين الأداء */
+            }
+
+            .quality-subtitle {
+                font-size: 0.85rem;
+                margin-bottom: 8px;
+            }
+
+            .quality-title {
+                font-size: 1.8rem;
+                /* تصغير العنوان للجوال */
+                line-height: 1.2;
+                margin-bottom: 20px;
+            }
+
+            .quality-desc {
+                font-size: 0.95rem;
+                line-height: 1.5;
+                padding: 0 15px;
+                /* حماية النص من الحواف */
+                margin-bottom: 30px;
+            }
+
+            .btn-solid-red {
+                padding: 15px 40px;
+                font-size: 0.9rem;
+                width: auto;
+            }
+        }
+    </style>
+
+    <section class="quality-assurance-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 text-center">
+
+                    {{-- العنوان الفرعي --}}
+                    <span class="quality-subtitle">PREMIUM BRAKE PRODUCTS PROVIDER</span>
+
+                    {{-- العنوان الرئيسي --}}
+                    <h2 class="quality-title">WE TAKE QUALITY VERY SERIOUSLY</h2>
+
+                    {{-- النص الوصفي --}}
+                    <p class="quality-desc">
+                        FIRST is committed to providing high-quality products and offers an automotive parts and components
+                        for global markets. Our range includes premium brake pads, brake shoes, brake discs, fuel pumps, and
+                        shock absorbers. As a reliable automotive parts supplier and distributor, we ensure durable
+                        performance tested for every road condition. Trusted by drivers and businesses alike, FIRST stands
+                        among the top automotive parts wholesalers in the Middle East and beyond.
+                    </p>
+
+                    {{-- الزر --}}
+                    <a href="https://first-parts.com/portfolios" class="btn-solid-red">KNOW MORE</a>
+
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <section class="csr-section">
         <div class="container">
-            
+
             <!-- العنوان الرئيسي -->
             <h2 class="csr-main-title">Corporate Social Responsibility</h2>
 
@@ -605,7 +673,9 @@
                     </div>
                     <h3 class="item-title">FIRST CARES</h3>
                     <p class="item-desc">
-                        Pioneering the well-being of automotive communities worldwide, FIRST goes beyond being just an automotive parts manufacturer by setting new standards in sustainable initiatives for lasting positive impacts.
+                        Pioneering the well-being of automotive communities worldwide, FIRST goes beyond being just an
+                        automotive parts manufacturer by setting new standards in sustainable initiatives for lasting
+                        positive impacts.
                     </p>
                 </div>
 
@@ -616,7 +686,8 @@
                     </div>
                     <h3 class="item-title">SAFETY FIRST</h3>
                     <p class="item-desc">
-                        As a leading automotive component manufacturer, our unwavering commitment to safety ensures reliable auto parts distribution that protects drivers and communities globally.
+                        As a leading automotive component manufacturer, our unwavering commitment to safety ensures reliable
+                        auto parts distribution that protects drivers and communities globally.
                     </p>
                 </div>
 
@@ -627,7 +698,8 @@
                     </div>
                     <h3 class="item-title">ENVIRONMENT FRIENDLY</h3>
                     <p class="item-desc">
-                        Embracing the green business philosophy, our commitment is to actively champion sustainable development, striving to maximize our efforts in promoting environmental responsibility.
+                        Embracing the green business philosophy, our commitment is to actively champion sustainable
+                        development, striving to maximize our efforts in promoting environmental responsibility.
                     </p>
                 </div>
 
@@ -638,7 +710,8 @@
                     </div>
                     <h3 class="item-title">ENERGY SAVING</h3>
                     <p class="item-desc">
-                        Adopting a strategic approach focused on "maximizing resource benefits throughout the entire process," ensuring efficiency and sustainability in our operations.
+                        Adopting a strategic approach focused on "maximizing resource benefits throughout the entire
+                        process," ensuring efficiency and sustainability in our operations.
                     </p>
                 </div>
 
@@ -649,142 +722,160 @@
                     </div>
                     <h3 class="item-title">MUTUAL GROWTH</h3>
                     <p class="item-desc">
-                        Encouraging the synergistic utilization of resources, cultivate shared value, and collectively achieve common objectives for sustainable growth.
+                        Encouraging the synergistic utilization of resources, cultivate shared value, and collectively
+                        achieve common objectives for sustainable growth.
                     </p>
                 </div>
 
             </div>
         </div>
-          <style>
-        /* =========================================
-           إعدادات عامة (Reset)
-           ========================================= */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Open Sans', sans-serif;
-            background-color: #f4f4f4; /* خلفية للصفحة ككل */
-        }
-
-        /* =========================================
-           تنسيقات القسم (CSR Section)
-           ========================================= */
-        .csr-section {
-            background-color: #ffffff;
-            padding: 100px 20px; /* مسافة داخلية علوية وسفلية كبيرة */
-            width: 100%;
-        }
-
-        /* حاوية المحتوى لضبط العرض */
-        .container {
-            max-width: 1400px; /* عرض واسع ليسمح بـ 5 أعمدة */
-            margin: 0 auto;
-        }
-
-        /* 1. العنوان الرئيسي */
-        .csr-main-title {
-            text-align: center;
-            color: #001530; /* اللون الكحلي الغامق */
-            font-family: 'Oswald', sans-serif;
-            font-size: 2.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 80px; /* مسافة كبيرة تفصل العنوان عن العناصر */
-        }
-
-        /* 2. الشبكة (Grid System) - 5 أعمدة */
-        .csr-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr); /* 5 أعمدة متساوية تماماً */
-            gap: 30px; /* المسافة بين الأعمدة */
-            justify-content: center;
-        }
-
-        /* 3. العنصر الفردي */
-        .csr-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        /* منطقة الأيقونة */
-        .icon-box {
-            height: 70px; /* ارتفاع ثابت لتوحيد المستوى */
-            display: flex;
-            align-items: flex-end; /* جعل الأيقونة في أسفل الصندوق الوهمي */
-            margin-bottom: 25px;
-        }
-
-        .icon-box i {
-            font-size: 50px; /* حجم الأيقونة */
-            color: #25D06F;   /* اللون الأحمر */
-        }
-
-        /* العنوان الفرعي (الأحمر) */
-        .item-title {
-            color: #25D06F;
-            font-size: 1rem;
-            font-weight: 700; /* Open Sans Bold */
-            text-transform: uppercase;
-            margin-bottom: 15px;
-            letter-spacing: 0.5px;
-        }
-
-        /* النص الوصفي */
-        .item-desc {
-            color: #555555;
-            font-size: 0.9rem; /* 14px */
-            line-height: 1.6;
-            font-weight: 400;
-            max-width: 240px; /* تحديد العرض لكي تتكسر الأسطر مثل الصورة */
-        }
-
-        /* =========================================
-           التجاوب (Responsive Media Queries)
-           ========================================= */
-        
-        /* شاشات اللابتوب المتوسطة والتابلت (تحويل لـ 3 أعمدة) */
-        @media (max-width: 1200px) {
-            .csr-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 50px;
+        <style>
+            /* =========================================
+               إعدادات عامة (Reset)
+               ========================================= */
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
             }
-        }
 
-        /* شاشات التابلت الصغيرة (تحويل لعمودين) */
-        @media (max-width: 800px) {
-            .csr-grid {
-                grid-template-columns: repeat(2, 1fr);
+            body {
+                font-family: 'Open Sans', sans-serif;
+                background-color: #f4f4f4;
+                /* خلفية للصفحة ككل */
             }
+
+            /* =========================================
+               تنسيقات القسم (CSR Section)
+               ========================================= */
+            .csr-section {
+                background-color: #ffffff;
+                padding: 100px 20px;
+                /* مسافة داخلية علوية وسفلية كبيرة */
+                width: 100%;
+            }
+
+            /* حاوية المحتوى لضبط العرض */
+            .container {
+                max-width: 1400px;
+                /* عرض واسع ليسمح بـ 5 أعمدة */
+                margin: 0 auto;
+            }
+
+            /* 1. العنوان الرئيسي */
             .csr-main-title {
-                font-size: 2rem;
-                margin-bottom: 50px;
+                text-align: center;
+                color: #001530;
+                /* اللون الكحلي الغامق */
+                font-family: 'Oswald', sans-serif;
+                font-size: 2.5rem;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                margin-bottom: 80px;
+                /* مسافة كبيرة تفصل العنوان عن العناصر */
             }
-        }
 
-        /* شاشات الجوال (عمود واحد) */
-        @media (max-width: 500px) {
+            /* 2. الشبكة (Grid System) - 5 أعمدة */
             .csr-grid {
-                grid-template-columns: 1fr;
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                /* 5 أعمدة متساوية تماماً */
+                gap: 30px;
+                /* المسافة بين الأعمدة */
+                justify-content: center;
             }
-            .item-desc {
-                max-width: 100%; /* استغلال كامل العرض في الجوال */
-                padding: 0 20px;
-            }
-        }
 
-    </style>
-     
-    <!-- استدعاء الخطوط (Oswald للعناوين، Open Sans للنصوص) -->
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Oswald:wght@700&display=swap" rel="stylesheet">
-    
-    <!-- مكتبة الأيقونات FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+            /* 3. العنصر الفردي */
+            .csr-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            /* منطقة الأيقونة */
+            .icon-box {
+                height: 70px;
+                /* ارتفاع ثابت لتوحيد المستوى */
+                display: flex;
+                align-items: flex-end;
+                /* جعل الأيقونة في أسفل الصندوق الوهمي */
+                margin-bottom: 25px;
+            }
+
+            .icon-box i {
+                font-size: 50px;
+                /* حجم الأيقونة */
+                color: #25D06F;
+                /* اللون الأحمر */
+            }
+
+            /* العنوان الفرعي (الأحمر) */
+            .item-title {
+                color: #25D06F;
+                font-size: 1rem;
+                font-weight: 700;
+                /* Open Sans Bold */
+                text-transform: uppercase;
+                margin-bottom: 15px;
+                letter-spacing: 0.5px;
+            }
+
+            /* النص الوصفي */
+            .item-desc {
+                color: #555555;
+                font-size: 0.9rem;
+                /* 14px */
+                line-height: 1.6;
+                font-weight: 400;
+                max-width: 240px;
+                /* تحديد العرض لكي تتكسر الأسطر مثل الصورة */
+            }
+
+            /* =========================================
+               التجاوب (Responsive Media Queries)
+               ========================================= */
+
+            /* شاشات اللابتوب المتوسطة والتابلت (تحويل لـ 3 أعمدة) */
+            @media (max-width: 1200px) {
+                .csr-grid {
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: 50px;
+                }
+            }
+
+            /* شاشات التابلت الصغيرة (تحويل لعمودين) */
+            @media (max-width: 800px) {
+                .csr-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+
+                .csr-main-title {
+                    font-size: 2rem;
+                    margin-bottom: 50px;
+                }
+            }
+
+            /* شاشات الجوال (عمود واحد) */
+            @media (max-width: 500px) {
+                .csr-grid {
+                    grid-template-columns: 1fr;
+                }
+
+                .item-desc {
+                    max-width: 100%;
+                    /* استغلال كامل العرض في الجوال */
+                    padding: 0 20px;
+                }
+            }
+        </style>
+
+        <!-- استدعاء الخطوط (Oswald للعناوين، Open Sans للنصوص) -->
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Oswald:wght@700&display=swap"
+            rel="stylesheet">
+
+        <!-- مكتبة الأيقونات FontAwesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     </section>
 
 
@@ -799,7 +890,7 @@
 
 
 
-{{-- ملاحظة: تأكد من أن مكتبة الـ Carousel (مثل OwlCarousel أو Slick) مهيئة لتعمل مع الكلاسات والأزرار أعلاه --}}
+    {{-- ملاحظة: تأكد من أن مكتبة الـ Carousel (مثل OwlCarousel أو Slick) مهيئة لتعمل مع الكلاسات والأزرار أعلاه --}}
 
 
 
@@ -994,15 +1085,14 @@
 
     <!-- Start finlance_blog section -->
     @if ($bs->news_section == 1)
-        <section class="modern-blog-section pt-120 pb-120">
-      
+        <section class="modern-blog-section pt-20 pb-120">
+
             <div class="container">
                 {{-- رأس القسم بتصميم احترافي --}}
                 <div class="row justify-content-center">
-                    <div class="col-lg-7 text-center mb-5">
+                    <div class="col-lg-7 text-center ">
                         <div class="section-title-wrapper">
-                            <span class="sub-title">{{ $bs->blog_section_title }}</span>
-                            <h2 class="main-title">{{ $bs->blog_section_subtitle }}</h2>
+                            <span class="sub-title">{{ 'FIRST Updates' }}</span>
                             <div class="title-line"></div>
                         </div>
                     </div>
@@ -1020,30 +1110,16 @@
                                                 class="img-fluid" alt="{{ $blog->title }}">
                                         </a>
                                         {{-- تاريخ فوق الصورة بشكل مميز --}}
-                                        @php
-                                            $date = \Carbon\Carbon::parse($blog->created_at);
-                                        @endphp
-                                        <div class="blog-date-badge">
-                                            <span>{{ $date->format('d') }}</span>
-                                            <small>{{ $date->format('M') }}</small>
-                                        </div>
+
                                     </div>
                                     <div class="blog-content">
-                                        <div class="blog-meta">
-                                            <span><i class="far fa-user"></i> {{ __('Admin') }}</span>
-                                            <span><i class="far fa-folder"></i>
-                                                {{ $blog->category ? $blog->category->name : 'General' }}</span>
-                                        </div>
+
                                         <h3 class="blog-title">
                                             <a href="{{ route('front.blogdetails', [$blog->slug, $blog->id]) }}">
                                                 {{ strlen($blog->title) > 50 ? mb_substr($blog->title, 0, 50, 'utf-8') . '...' : $blog->title }}
                                             </a>
                                         </h3>
-                                        <p class="blog-excerpt">
-                                            {!! strlen(strip_tags($blog->content)) > 110
-                                                ? mb_substr(strip_tags($blog->content), 0, 110, 'utf-8') . '...'
-                                                : strip_tags($blog->content) !!}
-                                        </p>
+
                                         <a href="{{ route('front.blogdetails', [$blog->slug, $blog->id]) }}"
                                             class="read-more-btn">
                                             {{ __('Read More') }} <i class="fas fa-arrow-right"></i>
@@ -1056,50 +1132,57 @@
                 </div>
             </div>
             <style>
-                  .modern-blog-section {
-        position: relative; /* ضروري لتموضع الطبقة المعتمة */
-        /* ضع مسار صورتك هنا */
-                background-image: url('{{ asset('assets/front/img/product/featured/' . $products[0]->feature_image) }}');
-        background-size: cover;     /* تغطية كامل المساحة */
-        background-position: center; /* توسيط الصورة */
-        background-repeat: no-repeat;
-        background-attachment: fixed; /* (اختياري) لتثبيت الصورة أثناء التمرير */
-        
-        /* الحفاظ على المسافات القديمة */
-        padding-top: 120px; 
-        padding-bottom: 120px;
-    }
+                .modern-blog-section {
+                    position: relative;
+                    /* ضروري لتموضع الطبقة المعتمة */
+                    /* ضع مسار صورتك هنا */
+                    background-image: url('{{ asset('assets/front/img/product/featured/' . $products[0]->feature_image) }}');
+                    background-size: cover;
+                    /* تغطية كامل المساحة */
+                    background-position: center;
+                    /* توسيط الصورة */
+                    background-repeat: no-repeat;
+                    background-attachment: fixed;
+                    /* (اختياري) لتثبيت الصورة أثناء التمرير */
 
-    /* 2. طبقة التعتيم (Overlay) */
-    .modern-blog-section::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.7); /* لون أسود بنسبة شفافية 70% */
-        z-index: 1;
-    }
+                    /* الحفاظ على المسافات القديمة */
+                    padding-top: 40px;
+                    padding-bottom: 40px;
+                }
 
-    /* 3. رفع المحتوى فوق طبقة التعتيم */
-    .modern-blog-section .container {
-        position: relative;
-        z-index: 2; /* لضمان ظهور النصوص والكروت فوق الخلفية السوداء */
-    }
+                /* 2. طبقة التعتيم (Overlay) */
+                .modern-blog-section::before {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.7);
+                    /* لون أسود بنسبة شفافية 70% */
+                    z-index: 1;
+                }
 
-    /* -----------------------------------------------------------
-       باقي التنسيقات تبقى كما هي تماماً، 
-       فقط سنعدل لون "العنوان الرئيسي" ليصبح أبيض ليظهر فوق الخلفية الداكنة
-    ----------------------------------------------------------- */
+                /* 3. رفع المحتوى فوق طبقة التعتيم */
+                .modern-blog-section .container {
+                    position: relative;
+                    z-index: 2;
+                    /* لضمان ظهور النصوص والكروت فوق الخلفية السوداء */
+                }
 
-    /* تعديل لون العنوان الرئيسي للأبيض */
-    .section-title-wrapper .main-title {
-        font-size: 2.5rem;
-        font-weight: 800;
-        color: #ffffff; /* تم التغيير للأبيض */
-        margin-bottom: 20px;
-    }
+                /* -----------------------------------------------------------
+           باقي التنسيقات تبقى كما هي تماماً،
+           فقط سنعدل لون "العنوان الرئيسي" ليصبح أبيض ليظهر فوق الخلفية الداكنة
+        ----------------------------------------------------------- */
+
+                /* تعديل لون العنوان الرئيسي للأبيض */
+                .section-title-wrapper .main-title {
+                    font-size: 2.5rem;
+                    font-weight: 800;
+                    color: #ffffff;
+                    /* تم التغيير للأبيض */
+                    margin-bottom: 20px;
+                }
 
                 .modern-blog-section {
                     background-color: #f8f9fa;

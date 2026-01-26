@@ -113,123 +113,331 @@
     <!--    announcement banner section end   -->
 
 
-		<!-- Start finlance_footer section -->
-		<footer class="finlance_footer footer_v1 dark_bg">
-            @if (!($bex->home_page_pagebuilder == 0 && $bs->top_footer_section == 0))
-			<div class="footer_top pt-120 pb-120">
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-3 col-md-6 col-sm-12">
-							<div class="widget_box about_widget">
-                                <a href="{{route('front.index')}}">
-                                    <img class="lazy" data-src="{{asset('assets/front/img/'.$bs->footer_logo)}}" alt="">
-                                </a>
-								<p>
-                                    @if (strlen(convertUtf8($bs->footer_text)) > 170)
-                                       {{substr(convertUtf8($bs->footer_text), 0, 170)}}<span style="display: none;">{{substr(convertUtf8($bs->footer_text), 170)}}</span>
-                                       <a href="#" class="see-more">{{__('see more')}}...</a>
-                                    @else
-                                       {{convertUtf8($bs->footer_text)}}
-                                    @endif
-                                </p>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-12">
-							<div class="widget_box contact_widget">
-								<h4 class="widget_title">{{__('Contact Us')}}</h4>
-								<p>
-                                    <span class="base-color"><i class="fas fa-map-marker-alt"></i></span>
-                                    @php
-                                    $addresses = explode(PHP_EOL, $bex->contact_addresses);
-                                    @endphp
+<!-- Start Newsletter & Footer Wrapper -->
+<div class="footer-area-wrapper">
 
-                                    @foreach ($addresses as $address)
-                                        {{$address}}
-                                        @if (!$loop->last)
-                                            |
-                                        @endif
-                                    @endforeach
-                                </p>
-								<p>
-                                    <span class="base-color">{{__('Phone')}}:</span>
-                                    @php
-                                    $phones = explode(',', $bex->contact_numbers);
-                                    @endphp
+    <!-- 1. Newsletter Section -->
+    <div class="newsletter-area-grey">
+        <div class="container custom-width-container">
+            <div class="row align-items-center">
+                
+                {{-- الجانب الأيسر: النصوص --}}
+                <div class="col-lg-7 col-md-12 mb-4 mb-lg-0">
+                    <div class="newsletter-box d-flex align-items-start">
+                        <div class="icon">
+                            <i class="far fa-envelope"></i>
+                        </div>
+                        <div class="content">
+                            <h3 class="title">SUBSCRIBE TO OUR NEWSLETTER</h3>
+                            <p class="desc">
+                                Want to keep up to date with all our latest news and information? Join our mailing list now.
+                            </p>
+                        </div>
+                    </div>
+                </div>
 
-                                    @foreach ($phones as $phone)
-                                        {{$phone}}
-                                        @if (!$loop->last)
-                                            ,
-                                        @endif
-                                    @endforeach
-                                </p>
-								<p>
-                                    <span class="base-color">{{__('Email')}}:</span>
-                                    @php
-                                        $mails = explode(',', $bex->contact_mails);
-                                    @endphp
-                                    @foreach ($mails as $mail)
-                                        {{$mail}}
-                                        @if (!$loop->last)
-                                            ,
-                                        @endif
-                                    @endforeach
-                                </p>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-12">
-							<div class="widget_box">
-								<h4 class="widget_title">{{__('Useful Links')}}</h4>
-								<ul class="widget_link">
-                                    @foreach ($ulinks as $key => $ulink)
-                                        <li><a href="{{$ulink->url}}">{{convertUtf8($ulink->name)}}</a></li>
-                                    @endforeach
-								</ul>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-12">
-							<div class="widget_box newsletter_box">
-								<h4 class="widget_title">{{__('Newsletter')}}</h4>
-								<p>{{convertUtf8($bs->newsletter_text)}}</p>
-								<form id="footerSubscribeForm" action="{{route('front.subscribe')}}" method="post">
-                                    @csrf
-									<div class="form_group">
-										<input type="email" class="form_control" placeholder="{{__('Enter Email Address')}}" name="email" required>
-                                        <p id="erremail" class="text-danger mb-0 err-email"></p>
-										<button type="submit" class="finlance_btn py-0">{{__('Subscribe')}}</button>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
+                {{-- الجانب الأيمن: الفورم --}}
+                <div class="col-lg-5 col-md-12">
+                    <form id="footerSubscribeForm" action="{{route('front.subscribe')}}" method="post" class="newsletter-form-inline">
+                        @csrf
+                        {{-- تم استخدام d-flex لإجبار العناصر على البقاء في صف واحد --}}
+                        <div class="form-row-mobile d-flex">
+                            <input type="email" class="form-control" placeholder="Your email address" name="email" required>
+                            <button type="submit" class="btn-signup">SIGN UP</button>
+                        </div>
+                        <p id="erremail" class="text-danger mb-0 err-email mt-2 small"></p>
+                    </form>
+                </div>
+
             </div>
-            @endif
+        </div>
+    </div>
 
+    <!-- 2. Footer Section -->
+    <footer class="main-footer-black">
+        <div class="container custom-width-container">
+            
+            {{-- الجزء العلوي --}}
+            <div class="footer-widgets">
+                <div class="row align-items-center">
+                    
+                    {{-- العمود 1: الشعار --}}
+                    <div class="col-lg-3 col-md-12 mb-4 mb-lg-0 text-center text-lg-left">
+                        <a href="{{route('front.index')}}">
+                            <img class="footer-logo" src="{{asset('assets/front/img/'.$bs->footer_logo)}}" alt="Logo">
+                        </a>
+                    </div>
 
-            @if (!($bex->home_page_pagebuilder == 0 && $bs->copyright_section == 0))
-			<div class="footer_bottom">
-				<div class="container">
-					<div class="row align-items-center">
-						<div class="col-lg-6">
-							<div class="copyright_text">
-								<p>{!! replaceBaseUrl(convertUtf8($bs->copyright_text)) !!}</p>
-							</div>
-						</div>
-						<div class="col-lg-6">
-							<div class="social_box">
-								<ul>
-                                    @foreach ($socials as $key => $social)
-                                        <li><a target="_blank" href="{{$social->url}}"><i class="{{$social->icon}}"></i></a></li>
-                                    @endforeach
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-            @endif
-		</footer><!-- End finlance_footer section -->
+                    {{-- العمود 2: روابط 1 --}}
+                    <div class="col-lg-2 col-md-6 col-6 mb-4 mb-lg-0">
+                        <ul class="footer-links">
+                            <li><a href="{{url('/portfolios')}}">About Us</a></li>
+                            <li><a href="{{url('/products')}}">Products</a></li>
+                            <li><a href="{{url('/contact')}}">Contact Us</a></li>
+                        </ul>
+                    </div>
+
+                    {{-- العمود 3: روابط 2 --}}
+                    <div class="col-lg-4 col-md-6 col-6 mb-4 mb-lg-0">
+                        <ul class="footer-links">
+                            <li><a href="{{url('/R-&-D')}}">R & D</a></li>
+                            <li><a href="{{url('/')}}">Find Parts</a></li>
+                            <li><a href="{{url('/Anti-Counterfeiting-Query')}}">Anti-Counterfeiting-Query</a></li>
+
+                        </ul>
+                    </div>
+
+                    {{-- العمود 4: الزر --}}
+                    <div class="col-lg-3 col-md-12 text-center text-lg-right">
+                        <a href="{{route('front.contact')}}" class="btn-contact-red">
+                            CONTACT US TODAY
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+            {{-- حقوق النشر --}}
+            <div class="footer-bottom-copyright">
+                <div class="row">
+                    <div class="col-12">
+                        <p class="copyright">
+                            &copy;OPTICAL SMART SOFTWARES {{date('Y')}} ALL RIGHTS RESERVED
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+</div>
+
+<style>
+    /* =========================================
+       Global Fonts & Layout
+       ========================================= */
+    .footer-area-wrapper {
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    /* تحديد عرض الحاوية لضمان الهوامش الجانبية في سطح المكتب */
+    @media (min-width: 1200px) {
+        .custom-width-container {
+            max-width: 1140px; /* أو أقل إذا أردت هوامش أكبر، مثلاً 1000px */
+            margin: 0 auto;
+        }
+    }
+
+    /* =========================================
+       1. Newsletter Section (Grey Box)
+       ========================================= */
+    .newsletter-area-grey {
+        background-color: #E6E6E6;
+        padding: 50px 0; /* مسافة رأسية جيدة */
+    }
+
+    .newsletter-box .icon {
+        font-size: 40px; /* أيقونة كبيرة */
+        color: #25D06F;
+        margin-right: 25px;
+        line-height: 1;
+        margin-top: 5px;
+    }
+
+    .newsletter-box .title {
+        color: #001530;
+        font-family: 'Oswald', sans-serif;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 1.25rem;
+        margin-bottom: 8px;
+        letter-spacing: 0.5px;
+    }
+
+    .newsletter-box .desc {
+        color: #666;
+        font-size: 0.9rem;
+        margin: 0;
+        line-height: 1.5;
+        max-width: 450px; /* تحديد عرض النص ليكون مرتباً */
+    }
+
+    /* --- Form Styling (Mobile & Desktop) --- */
+    /* الكلاس d-flex في الـ HTML يضمن وجودهم في سطر واحد */
+    .form-row-mobile {
+        width: 100%;
+        background: #fff; /* خلفية بيضاء للحاوية لتوحيد الشكل */
+    }
+
+    .newsletter-form-inline .form-control {
+        border: none;
+        height: 50px;
+        border-radius: 0;
+        padding-left: 20px;
+        font-size: 0.9rem;
+        width: 100%; /* يأخذ المساحة المتبقية */
+    }
+    
+    .newsletter-form-inline .form-control:focus {
+        box-shadow: none;
+    }
+
+    .newsletter-form-inline .btn-signup {
+        background-color: #25D06F;
+        color: #fff;
+        border: none;
+        padding: 0 30px; /* مسافة داخلية للزر */
+        font-weight: 700;
+        font-family: 'Oswald', sans-serif;
+        text-transform: uppercase;
+        height: 50px;
+        cursor: pointer;
+        transition: 0.3s;
+        white-space: nowrap; /* منع النص من النزول لسطر جديد */
+    }
+    
+    .newsletter-form-inline .btn-signup:hover {
+        background-color: #25D06F;
+    }
+
+    /* =========================================
+       2. Footer Section (Black Box)
+       ========================================= */
+    .main-footer-black {
+        background-color: #000000;
+        padding-top: 70px;
+        padding-bottom: 30px;
+        color: #fff;
+    }
+
+    .footer-logo {
+        max-width: 220px;
+        height: auto;
+    }
+
+    .footer-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .footer-links li {
+        margin-bottom: 12px;
+        position: relative;
+        padding-left: 15px;
+    }
+
+    .footer-links li::before {
+        content: "\f105"; /* سهم أيمن */
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        color: #25D06F;
+        position: absolute;
+        left: 0;
+        top: 2px;
+    }
+
+    .footer-links li a {
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 0.95rem;
+        font-weight: 600;
+        transition: color 0.3s;
+    }
+    .footer-links li a:hover {
+        color: #25D06F;
+    }
+
+    .btn-contact-red {
+        display: inline-block;
+        background-color: #25D06F;
+        color: #fff;
+        padding: 14px 40px;
+        font-family: 'Oswald', sans-serif;
+        font-weight: 700;
+        text-transform: uppercase;
+        text-decoration: none;
+        font-size: 0.95rem;
+        transition: 0.3s;
+    }
+    .btn-contact-red:hover {
+        background-color: #fff;
+        color: #25D06F;
+    }
+
+    .footer-bottom-copyright {
+        border-top: 1px solid #333;
+        margin-top: 60px;
+        padding-top: 20px;
+    }
+
+    .copyright {
+        font-size: 0.75rem;
+        color: #ccc;
+        text-transform: uppercase;
+        margin: 0;
+        text-align: left;
+    }
+
+    /* =========================================
+       3. Mobile Responsiveness Fixes
+       ========================================= */
+    @media (max-width: 991px) {
+        /* النشرة البريدية */
+        .newsletter-box {
+            margin-bottom: 25px;
+            flex-direction: row; /* التأكد من أن الأيقونة بجانب النص */
+            align-items: flex-start;
+        }
+        
+        /* إجبار الزر وحقل الإدخال ليكونوا في سطر واحد في الموبايل */
+        .form-row-mobile {
+            display: flex !important;
+            flex-direction: row !important; /* صف واحد */
+            width: 100%;
+        }
+        
+        .newsletter-form-inline .form-control {
+            flex-grow: 1; /* الحقل يأخذ المساحة المتاحة */
+            width: auto;
+            border: 1px solid #ddd; /* إضافة حدود لتظهر بوضوح في الموبايل */
+        }
+        
+        .newsletter-form-inline .btn-signup {
+            flex-shrink: 0; /* الزر لا يتقلص */
+            width: auto;
+            padding: 0 15px; /* تقليل المسافة الداخلية قليلاً في الشاشات الصغيرة */
+            font-size: 0.9rem;
+        }
+
+        /* الفوتر */
+        .footer-logo {
+            margin-bottom: 40px;
+            max-width: 180px;
+        }
+        .btn-contact-red {
+            width: 100%;
+            margin-top: 30px;
+            text-align: center;
+        }
+        .copyright {
+            text-align: center;
+        }
+        
+        /* محاذاة العناصر في الوسط للموبايل */
+        .footer-widgets .text-lg-left, 
+        .footer-widgets .text-lg-right {
+            text-align: center !important;
+        }
+        
+        /* في الموبايل، نجعل الروابط (أعمدة 6) محاذية لليسار قليلاً لتبدو مرتبة */
+        .footer-links {
+            text-align: left;
+            display: inline-block;
+        }
+    }
+</style>
 
         @if ($bex->is_shop == 1 && $bex->catalog_mode == 0)
             <div id="cartIconWrapper">
