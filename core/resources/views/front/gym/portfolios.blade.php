@@ -111,7 +111,7 @@
         .stats-section {
             position: relative;
             /* استبدل الرابط أدناه بصورة المصنع الخاصة بك */
-            background-image: url('http://localhost/first-parts/assets/front/img/product/featured/696e8e4857bd1.png');
+            background-image: url('https://optical-soft.com/first-parts/assets/front/img/product/featured/697803a2cb3ca.jpeg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed; /* تثبيت الخلفية */
@@ -131,8 +131,8 @@
 
         .stats-section .container { position: relative; z-index: 2; }
 
-        .stats-title { font-size: 2rem; font-weight: 700; margin-bottom: 50px; letter-spacing: 1px; }
-        .stats-sub-title { font-size: 2rem; font-weight: 700; margin: 60px 0 50px; letter-spacing: 1px; text-transform: uppercase; }
+        .stats-title { font-size: 2rem; font-weight: 700; margin-bottom: 50px; letter-spacing: 1px; color: #fff; }
+        .stats-sub-title {color: #fff; font-size: 2rem; font-weight: 700; margin: 60px 0 50px; letter-spacing: 1px; text-transform: uppercase; }
 
         .stat-item { margin-bottom: 30px; }
 
@@ -223,15 +223,12 @@
                 <div class="col-lg-6">
                     <div class="image-grid">
                         <div class="row">
-                            <div class="col-6"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=400&h=300" class="grid-img" alt="Factory 1"></div>
-                            <div class="col-6 video-thumb">
-                                <img src="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&w=400&h=300" class="grid-img" alt="Factory 2">
-                                <div class="play-overlay"><i class="fas fa-play"></i></div>
-                            </div>
-                            <div class="col-6"><img src="https://images.unsplash.com/photo-1531297461136-82bf88d8e935?auto=format&fit=crop&w=400&h=300" class="grid-img" alt="Factory 3"></div>
-                            <div class="col-6"><img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=400&h=300" class="grid-img" alt="Factory 4"></div>
-                            <div class="col-6"><img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=400&h=300" class="grid-img" alt="Factory 5"></div>
-                            <div class="col-6"><img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=400&h=300" class="grid-img" alt="Factory 6"></div>
+                            <div class="col-6"><img src="http://optical-soft.com/first-parts/assets/lfm/files/shares/blogs/logo-green.png" class="grid-img" alt="Factory 1"></div>
+                            
+                            <div class="col-6"><img src="http://optical-soft.com/first-parts/assets/lfm/files/shares/blogs/backgound-1.jpeg" class="grid-img" alt="Factory 3"></div>
+                            <div class="col-6"><img src="http://optical-soft.com/first-parts/assets/lfm/files/shares/blogs/backgound-3.jpeg" class="grid-img" alt="Factory 4"></div>
+                            <div class="col-6"><img src="https://optical-soft.com/first-parts/assets/lfm/files/shares/blogs/backgound-3.jpeg" class="grid-img" alt="Factory 5"></div>
+                            <div class="col-6"><img src="http://optical-soft.com/first-parts/assets/lfm/files/shares/blogs/backgound-4.jpeg" class="grid-img" alt="Factory 6"></div>
                         </div>
                     </div>
                 </div>

@@ -171,27 +171,17 @@
                                     <a href="{{route('front.blogdetails', [$blog->slug])}}">
                                         <img class="lazy img-fluid" data-src="{{asset('assets/front/img/blogs/'.$blog->main_image)}}" alt="{{$blog->title}}">
                                     </a>
-                                    {{-- تاريخ فوق الصورة --}}
-                                    @php
-                                        $date = \Carbon\Carbon::parse($blog->created_at);
-                                    @endphp
-                                    <div class="post-date-badge">
-                                        <span>{{ $date->format('d') }}</span>
-                                        <small>{{ $date->format('M') }}</small>
-                                    </div>
+                                    
+                              
                                 </div>
                                 <div class="post-info">
-                                    <div class="post-meta">
-                                        <span><i class="far fa-user"></i> {{__('Admin')}}</span>
-                                    </div>
+                                   
                                     <h4 class="post-title">
                                         <a href="{{route('front.blogdetails', [$blog->slug])}}">
                                             {{strlen($blog->title) > 45 ? mb_substr($blog->title, 0, 45, 'utf-8') . '...' : $blog->title}}
                                         </a>
                                     </h4>
-                                    <p class="post-excerpt">
-                                        {!! strlen(strip_tags($blog->content)) > 90 ? mb_substr(strip_tags($blog->content), 0, 90, 'utf-8') . '...' : strip_tags($blog->content) !!}
-                                    </p>
+                                  
                                     <a href="{{route('front.blogdetails', [$blog->slug])}}" class="read-more-link">
                                         {{__('Read More')}} <i class="fas fa-arrow-left"></i>
                                     </a>

@@ -49,7 +49,7 @@
 
                 {{-- زر FIND PARTS --}}
                 <div class="cta-button-wrapper d-none d-md-block">
-                    <a href="{{ route('front.product') }}" class="btn-find-parts">FIND PARTS</a>
+                    <a href="{{url('/FIND-PART')}}" class="btn-find-parts">FIND PARTS</a>
                 </div>
 
                 {{-- زر القائمة للموبايل (Hamburger Icon) --}}
